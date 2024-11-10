@@ -191,7 +191,7 @@ public class frmClienteInsert extends javax.swing.JFrame {
         senha = String.valueOf(txtSenha.getPassword());
         data_nascimento = txtData.getText();
        
-        ClienteSERVICE.CadastrarCliente(nome, cpf, data_nascimento, email, senha);
+        ClienteSERVICE.cadastrarCliente(nome, cpf, data_nascimento, email, senha);
     }                                                   
 
     private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {                                       

@@ -29,14 +29,14 @@ public class ClienteDAO {
         }    
     }
     
-    public void updateCliente(ClienteMODEL cliente) throws ParseException {
+    public void updateCliente(ClienteMODEL cliente) {
         try {
             Connection conn = ConnectionUTIL.connectDB();
-            String sql = "UPDATE clientes SET email = ?, senha = ? WHERE id_cliente = ?";
+            String sql = "UPDATE clientes SET email = ?, senha = ? WHERE cpf = ?";
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setString(1, cliente.getEmail());
             pstm.setString(2, cliente.getSenha());
-            pstm.setInt(3, cliente.getId());
+            pstm.setString(3, cliente.getCpf());
             pstm.execute();
             pstm.close();
             

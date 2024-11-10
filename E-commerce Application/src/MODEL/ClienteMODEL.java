@@ -1,4 +1,5 @@
 package MODEL;
+import MODEL.INTERFACES_ABSTRATAS.PessoaMODEL;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
