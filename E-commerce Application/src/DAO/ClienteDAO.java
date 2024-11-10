@@ -28,4 +28,22 @@ public class ClienteDAO {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }    
     }
+    
+    public void updateCliente(ClienteMODEL cliente) throws ParseException {
+        try {
+            Connection conn = ConnectionUTIL.connectDB();
+            String sql = "UPDATE clientes SET email = ?, senha = ? WHERE id_cliente = ?";
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cliente.getEmail());
+            pstm.setString(2, cliente.getSenha());
+            pstm.setInt(3, cliente.getId());
+            pstm.execute();
+            pstm.close();
+            
+            JOptionPane.showMessageDialog(null, "Os dados do Cliente foram atualizados com sucesso!");
+        
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
 }

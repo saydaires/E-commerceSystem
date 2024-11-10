@@ -7,7 +7,7 @@ package VIEW;
 import DAO.ClienteDAO;
 import MODEL.ClienteMODEL;
 import java.text.ParseException;
-
+import SERVICE.ClienteSERVICE;
 /**
  *
  * @author aires
@@ -183,20 +183,15 @@ public class frmClienteInsert extends javax.swing.JFrame {
     }                                       
 
     private void btnCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {                                                    
-        try {
-            String nome, cpf, email, senha, data_nascimento;
-            nome = txtNome.getText();
-            cpf = txtCpf.getText();
-            email = txtEmail.getText();
-            senha = String.valueOf(txtSenha.getPassword());
-            data_nascimento = txtData.getText();
-            ClienteMODEL clienteMODEL = new ClienteMODEL(nome, cpf, data_nascimento, email, senha);
-            ClienteDAO clienteDAO = new ClienteDAO();
-            clienteDAO.insertCliente(clienteMODEL);
-        
-        } catch (ParseException e) {
-            e.getMessage();
-        }
+
+        String nome, cpf, email, senha, data_nascimento;
+        nome = txtNome.getText();
+        cpf = txtCpf.getText();
+        email = txtEmail.getText();
+        senha = String.valueOf(txtSenha.getPassword());
+        data_nascimento = txtData.getText();
+       
+        ClienteSERVICE.CadastrarCliente(nome, cpf, data_nascimento, email, senha);
     }                                                   
 
     private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {                                       
