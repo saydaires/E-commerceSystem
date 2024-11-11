@@ -19,6 +19,10 @@ public abstract class PessoaMODEL {
         return id;
     }
     
+    public void setId(int id) { // esse metodo sera usado em caso de consultas e retornos de um objeto funcionario/cliente
+        this.id = id;
+    }
+    
     public String getNome() {
         return nome;
     }

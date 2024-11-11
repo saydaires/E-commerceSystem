@@ -14,7 +14,6 @@ public class FuncionarioMODEL extends PessoaMODEL {
     @Override
     public java.sql.Date getData() throws ParseException { // o objeto do tipo 'Date' esperado como retorno e java.sql.Date
         SimpleDateFormat dataAdmissaoFormatada = new SimpleDateFormat("yyyy-MM-dd");
-        
         java.util.Date dataAdmissao_JAVA = dataAdmissaoFormatada.parse(data_admissao);
         long dataAdmissaoMilissegundos = dataAdmissao_JAVA.getTime();
         java.sql.Date dataAdmissao_SQL = new java.sql.Date(dataAdmissaoMilissegundos);
