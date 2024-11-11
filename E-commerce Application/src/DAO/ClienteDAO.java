@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import java.text.ParseException;
 
 public class ClienteDAO {
-    public void insertCliente(ClienteMODEL cliente) throws ParseException { // o metodo pode lancar essa excecao devido ao cliente.getData()
+    public static void insertCliente(ClienteMODEL cliente) throws ParseException { // o metodo pode lancar essa excecao devido ao cliente.getData()
         try {
             Connection conn = ConnectionUTIL.connectDB(); 
             String sql = "INSERT INTO clientes(nome_cliente, cpf, email, senha, data_nascimento) VALUES(?, ?, ?, ?, ?)";
@@ -29,7 +29,7 @@ public class ClienteDAO {
         }    
     }
     
-    public void updateCliente(ClienteMODEL cliente) {
+    public static void updateCliente(ClienteMODEL cliente) {
         try {
             Connection conn = ConnectionUTIL.connectDB();
             String sql = "UPDATE clientes SET email = ?, senha = ? WHERE cpf = ?";

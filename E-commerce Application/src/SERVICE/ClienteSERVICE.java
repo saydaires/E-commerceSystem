@@ -9,8 +9,7 @@ public class ClienteSERVICE {
         
         try {    
             ClienteMODEL cliente = new ClienteMODEL(nome, cpf, data_nascimento, email, senha);
-            ClienteDAO clienteDAO = new ClienteDAO();
-            clienteDAO.insertCliente(cliente);
+            ClienteDAO.insertCliente(cliente);
             
         } catch(ParseException e) {
             JOptionPane.showMessageDialog(null, "Data mal formatada!");
@@ -20,8 +19,7 @@ public class ClienteSERVICE {
     public static void atualizarCliente(ClienteMODEL clienteExistente, String email, String senha) {
         clienteExistente.setEmail(email);
         clienteExistente.setSenha(senha);
-        
-        ClienteDAO clienteDAO = new ClienteDAO();
-        clienteDAO.updateCliente(clienteExistente);
+
+        ClienteDAO.updateCliente(clienteExistente);
     }
 }
