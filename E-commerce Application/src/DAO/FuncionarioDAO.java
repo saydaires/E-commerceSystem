@@ -27,7 +27,7 @@ public class FuncionarioDAO {
         pstm.execute();
         pstm.close();
         
-        JOptionPane.showMessageDialog(null, "Funcionario cadastrado com sucesso!");
+        JOptionPane.showMessageDialog(null, "Funcionario CADASTRADO com sucesso!");
         
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -39,6 +39,7 @@ public class FuncionarioDAO {
             Connection conn = ConnectionUTIL.connectDB();
             String sql = "SELECT * FROM funcionarios WHERE id_funcionario = ?";
             PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, id_funcionario);
             ResultSet rs = pstm.executeQuery();
             rs.first();
             
@@ -70,6 +71,7 @@ public class FuncionarioDAO {
             String sql = "SELECT * FROM funcionarios";
             PreparedStatement pstm = conn.prepareStatement(sql);
             ResultSet rs = pstm.executeQuery();
+            
             while(rs.next()) {
                 Integer id = rs.getInt("id_funcionario");
                 String nome = rs.getString("nome_funcionario");
@@ -84,13 +86,42 @@ public class FuncionarioDAO {
                 // adicionando na estrutura de dados
                 funcionarios.add(funcionario);
             }
+            
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, "Nenhum registro encontrado em funcionarios!");
         }
         return funcionarios; // funcionario.isEmpty() pode ser verdadeiro se o fluxo cair no bloco catch()
     }
     
-    // public static void updateFuncionario(int id_funcionario)
-    // public static void deleteFuncionario(int id_funcionario)
-    // proxima etapa: continuar desenvolvimento de ClienteDAO
+    public static void updateFuncionario(FuncionarioMODEL funcionario) {
+       try {
+           Connection conn = ConnectionUTIL.connectDB();
+           String sql = "UPDATE funcionarios SET email = ?, senha = ? WHERE id_funcionario = ?";
+           PreparedStatement pstm = conn.prepareStatement(sql);
+           pstm.setString(1, funcionario.getEmail());
+           pstm.setString(2, funcionario.getSenha());
+           pstm.setInt(3, funcionario.getId());
+           pstm.executeUpdate();
+           pstm.close();
+           JOptionPane.showMessageDialog(null, "Funcionario ATUALIZADO com sucesso!");
+       
+       } catch(SQLException e) {
+           JOptionPane.showMessageDialog(null, e.getMessage());
+       }
+    }
+    
+     public static void deleteFuncionario(FuncionarioMODEL funcionario) {
+         try {
+             Connection conn = ConnectionUTIL.connectDB();
+             String sql = "DELETE FROM funcionarios WHERE id_funcionario = ?";
+             PreparedStatement pstm = conn.prepareStatement(sql);
+             pstm.setInt(1, funcionario.getId());
+             pstm.executeUpdate();
+             pstm.close();
+             JOptionPane.showMessageDialog(null, "Funcionario DELETADO com sucesso!");
+             
+         } catch(SQLException e) {
+             JOptionPane.showMessageDialog(null, e.getMessage());
+         }
+     }
 }

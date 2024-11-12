@@ -30,6 +30,9 @@ public class ItensPedidosDAO {
         }
     }
     
+    // so precisa dos metodos deletePEDIDO e selectPedido, um pedido nao pode ser alterado uma vez feito
+    // logo, nao precisa do metodo updatePedido
+    
     public static double calcularPrecoTotal(ItensPedidosMODEL itemPedido) {
         if(itemPedido.getIdCupom() == null) { // o itemPedido nao possui cupom de desconto
             return getPrecoUnitario(itemPedido);

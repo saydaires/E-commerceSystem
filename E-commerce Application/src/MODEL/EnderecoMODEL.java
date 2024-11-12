@@ -21,6 +21,10 @@ public class EnderecoMODEL {
         return id_endereco;
     }
     
+    public void setIdEndereco(int idEndereco) {
+        this.id_endereco = idEndereco;
+    }
+    
     public int getIdCliente() {
         return id_cliente;
     }

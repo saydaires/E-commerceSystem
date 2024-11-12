@@ -27,6 +27,10 @@ public class ProdutoMODEL {
         return id_produto;
     }
     
+    public void setIdProduto(int id_produto) {
+        this.id_produto = id_produto;
+    }
+    
     public int getIdCategoria() {
         return id_categoria;
     }
