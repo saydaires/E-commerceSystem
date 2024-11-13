@@ -19,6 +19,18 @@ public class ItensPedidosMODEL {
         return id_item_pedido;
     }
     
+    public void setIdItemPedido(int id_item_pedido) {
+        this.id_item_pedido = id_item_pedido;
+    }
+    
+    public void startPrecoUnitario(double precoUnitario) {
+        this.precoUnitario = precoUnitario;
+    }
+    
+    public void startValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+    
     public int getIdPedido() {
         return id_pedido;
     }
