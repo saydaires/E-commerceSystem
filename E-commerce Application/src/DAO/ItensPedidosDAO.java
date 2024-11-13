@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItensPedidosDAO {
     
@@ -39,11 +41,12 @@ public class ItensPedidosDAO {
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setInt(1, id_item_pedido);
             ResultSet rs = pstm.executeQuery();
+            rs.first();
             ItensPedidosMODEL itemPedido = new ItensPedidosMODEL(rs.getInt("id_pedido"), rs.getInt("id_produto"), rs.getInt("id_cupom"), rs.getInt("quantidade"));
             
             itemPedido.setIdItemPedido(id_item_pedido);
-            itemPedido.startPrecoUnitario(getPrecoUnitario(itemPedido));
-            itemPedido.startValorTotal(calcularValorTotal(itemPedido));
+            itemPedido.startPrecoUnitario(rs.getDouble("preco_unitario"));
+            itemPedido.startValorTotal(rs.getDouble("valor_total"));
             return itemPedido;
 
         } catch(SQLException e) {
@@ -51,6 +54,37 @@ public class ItensPedidosDAO {
             return null;
         }
     }
+    
+        
+    public static List<ItensPedidosMODEL> listItensPedidos() { 
+        List<ItensPedidosMODEL> itensPedidos = new ArrayList<>();
+        try {
+            Connection conn = ConnectionUTIL.connectDB();
+            String sql = "SELECT * FROM itens_pedidos";
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            
+            while(rs.next()) {
+                Integer id_item_pedido = rs.getInt("id_item_pedido");
+                int idPedido = rs.getInt("id_pedido");
+                int idProduto = rs.getInt("id_produto");
+                int idCupom = rs.getInt("id_cupom");
+                int quantidade = rs.getInt("quantidade");
+                double precoUnitario = rs.getDouble("preco_unitario");
+                double valorTotal = rs.getDouble("valor_total");
+                
+                ItensPedidosMODEL itemPedido = new ItensPedidosMODEL(idPedido, idProduto, idCupom, quantidade);
+                itemPedido.setIdItemPedido(id_item_pedido);
+                itemPedido.startPrecoUnitario(precoUnitario);
+                itemPedido.startValorTotal(valorTotal);
+                itensPedidos.add(itemPedido);
+            }
+            
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado em clientes!");
+        }
+        return itensPedidos; 
+    }  
 
     public static double calcularValorTotal(ItensPedidosMODEL itemPedido) {
         if(itemPedido.getIdCupom() == null) { // o itemPedido nao possui cupom de desconto

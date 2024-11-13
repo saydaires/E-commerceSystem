@@ -19,6 +19,10 @@ public class PedidosMODEL {
         return id_pedido;
     }
     
+        public void setIdPedido(int idPedido) {
+        this.id_pedido = idPedido;
+    }
+    
     public Integer getIdCliente() {
         return id_cliente;
     }
