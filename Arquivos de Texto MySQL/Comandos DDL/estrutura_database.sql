@@ -49,7 +49,8 @@ CREATE TABLE itens_pedidos(
     quantidade INT NOT NULL,
     preco_unitario DECIMAL(10, 2) NOT NULL,
     valor_total DECIMAL(10, 2) NOT NULL, -- o valor total varia entre quantidade * preco_unitario ou (quantidade * preco_unitario) - desconto
-    FOREIGN KEY(id_pedido) REFERENCES pedidos(id_pedido) ON DELETE CASCADE, -- refatoracao
+    FOREIGN KEY(id_pedido) REFERENCES pedidos(id_pedido) ON DELETE CASCADE,
+    FOREIGN KEY(id_cupom) REFERENCES cupons_desconto(id_cupom),
     FOREIGN KEY(id_produto) REFERENCES produtos(id_produto)
 );
 

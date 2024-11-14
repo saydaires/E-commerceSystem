@@ -22,6 +22,10 @@ public class CategoriaMODEL {
         return id_categoria;
     }
     
+      public void setId(int id_categoria) {
+        this.id_categoria = id_categoria;
+    }
+    
     public String getNomeCategoria() {
         return nomeCategoria;
     }

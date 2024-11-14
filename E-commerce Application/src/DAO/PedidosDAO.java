@@ -107,12 +107,25 @@ public class PedidosDAO {
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setInt(1, id_pedido);
             pstm.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Pedido DELETADO com suceSSO!");
+            pstm.close();
+            JOptionPane.showMessageDialog(null, "Pedido DELETADO com sucesso!");
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
     
-    // updatStatusPedido --> Criar uma trigger que exclua o pedido se o status for alterado para ENTREGUE
-   
+    public static void updateStatusPedido(int id_pedido, StatusPedido statusPedido) {
+        try {
+            Connection conn = ConnectionUTIL.connectDB();
+            String sql = "UPDATE pedidos SET status_pedido = ? WHERE id_pedido = ?";
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, statusPedido.getDescricao());
+            pstm.setInt(2, id_pedido);
+            pstm.executeUpdate();
+            pstm.close();
+            JOptionPane.showMessageDialog(null, "Status do Pedido atualizado sucesso!");
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
 }

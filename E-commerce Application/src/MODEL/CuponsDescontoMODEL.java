@@ -19,6 +19,10 @@ public class CuponsDescontoMODEL {
         return id_cupom;
     }
     
+    public void setIdCupom(int id_cupom) {
+        this.id_cupom = id_cupom;
+    }
+    
     public String getCodCupom() {
         return codCupom;
     }
