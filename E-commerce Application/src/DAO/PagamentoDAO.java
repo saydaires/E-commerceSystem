@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 
@@ -65,5 +67,39 @@ public class PagamentoDAO {
             JOptionPane.showMessageDialog(null, e.getMessage());
             return null;
         }
+    }
+    
+    public static List<PagamentoMODEL> listPagamentos() {
+        List<PagamentoMODEL> pagamentos = new ArrayList<>();
+        try {
+            Connection conn = ConnectionUTIL.connectDB();
+            String sql = "SELECT * FROM pagamentos";
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            while(rs.next()) {
+                java.sql.Date dataPagamentoSQL = rs.getDate("data_pagamento");
+                SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
+                String dataPagamento = formatador.format(dataPagamentoSQL);
+
+                String metodoPagamentoSQL = rs.getString("metodo_pagamento");
+                MetodoPagamento metodoPagamento = null;
+                switch(metodoPagamentoSQL) {
+                    case "CARTAO":
+                        metodoPagamento = MetodoPagamento.CARTAO;
+                        break;
+                    case "BOLETO":
+                        metodoPagamento = MetodoPagamento.BOLETO;
+                        break;
+                    case "PIX":
+                        metodoPagamento = MetodoPagamento.PIX;
+                }
+                PagamentoMODEL pagamento = new PagamentoMODEL(rs.getInt("id_pedido"), dataPagamento, rs.getDouble("valor_pago"), metodoPagamento);
+                pagamento.setIdPagamento(rs.getInt("id_pagamento"));
+                pagamentos.add(pagamento);
+            }
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return pagamentos;
     }
 }

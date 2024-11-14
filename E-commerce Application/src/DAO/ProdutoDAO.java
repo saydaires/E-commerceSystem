@@ -32,10 +32,35 @@ public class ProdutoDAO {
         }
     }
     
-    public static ProdutoMODEL selectProduto(String cod_produto) { 
+    public static ProdutoMODEL selectProdutoNome(String nomeProduto) {
         try {
             Connection conn = ConnectionUTIL.connectDB();
-            String sql = "SELECT * FROM produtos WHERE cod_funcionario = ?";
+            String sql = "SELECT * FROM produtos WHERE nome_produto = ?";
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, nomeProduto);
+            ResultSet rs = pstm.executeQuery();
+            rs.first();
+            
+            Integer idProduto = rs.getInt("id_produto");
+            String cod_produto = rs.getString("cod_produto");
+            Double precoUnitario = rs.getDouble("preco_unitario");
+            int qtdEstoque = rs.getInt("qtd_estoque");
+            int id_categoria = rs.getInt("id_categoria");
+            ProdutoMODEL produto = new ProdutoMODEL(nomeProduto, cod_produto, qtdEstoque, precoUnitario, id_categoria);
+            produto.setIdProduto(idProduto);
+            return produto;
+            
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return null;
+        }
+    }
+    
+    
+    public static ProdutoMODEL selectProdutoCodigo(String cod_produto) { 
+        try {
+            Connection conn = ConnectionUTIL.connectDB();
+            String sql = "SELECT * FROM produtos WHERE cod_produto = ?";
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setString(1, cod_produto);
             ResultSet rs = pstm.executeQuery();
@@ -47,6 +72,7 @@ public class ProdutoDAO {
             int qtdEstoque = rs.getInt("qtd_estoque");
             int id_categoria = rs.getInt("id_categoria");
             ProdutoMODEL produto = new ProdutoMODEL(nomeProduto, cod_produto, qtdEstoque, precoUnitario, id_categoria);
+            produto.setIdProduto(idProduto);
             return produto;
             
         } catch(SQLException e) {
