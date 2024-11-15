@@ -96,3 +96,10 @@ CREATE TABLE enderecos(
     cep VARCHAR(8) NOT NULL,
     FOREIGN KEY(id_cliente) REFERENCES clientes(id_cliente)
 );
+
+CREATE TABLE pedidos_entregues(
+	id_pedido_entregue INT PRIMARY KEY AUTO_INCREMENT,
+    id_pedido INT NOT NULL, -- FK
+    data_entrega DATE NOT NULL,
+    FOREIGN KEY(id_pedido) REFERENCES pedidos(id_pedido)
+);

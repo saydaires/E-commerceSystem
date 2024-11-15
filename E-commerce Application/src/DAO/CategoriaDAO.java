@@ -26,8 +26,6 @@ public class CategoriaDAO {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }    
     }
-    
-    /*
         public static CategoriaMODEL selectCategoriaNome(String nomeCategoria) {
         try {
             Connection conn = ConnectionUTIL.connectDB();
@@ -37,23 +35,17 @@ public class CategoriaDAO {
             ResultSet rs = pstm.executeQuery();
             rs.first();
             
-            Integer idProduto = rs.getInt("id_produto");
-            String cod_produto = rs.getString("cod_produto");
-            Double precoUnitario = rs.getDouble("preco_unitario");
-            int qtdEstoque = rs.getInt("qtd_estoque");
-            int id_categoria = rs.getInt("id_categoria");
-            ProdutoMODEL produto = new ProdutoMODEL(nomeProduto, cod_produto, qtdEstoque, precoUnitario, id_categoria);
-            produto.setIdProduto(idProduto);
-            return produto;
+            Integer idCategoria = rs.getInt("id_categoria");
+            String descricao = rs.getString("descricao");
+            CategoriaMODEL categoria = new CategoriaMODEL(nomeCategoria, descricao);
+            categoria.setId(rs.getInt("id_categoria"));
+            return categoria;
             
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
             return null;
         }
     }
-    */
-    
-    
     
     public static CategoriaMODEL selectCategoriaId(int id_categoria) {
         try {

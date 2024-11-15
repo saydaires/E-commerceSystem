@@ -66,6 +66,32 @@ public class ClienteDAO {
          }
     }
     
+    public static ClienteMODEL selectClienteNome(String nomeCliente) {
+        try {
+            Connection conn = ConnectionUTIL.connectDB();
+            String sql = "SELECT * FROM clientes WHERE nome_cliente = ?";
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, nomeCliente);
+            ResultSet rs = pstm.executeQuery();
+            rs.first();
+            java.sql.Date dataNascimentoSQL = rs.getDate("data_nascimento");
+            SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
+            String dataNascimento = formatador.format(dataNascimentoSQL);
+            String cpf = rs.getString("cpf");
+            String email = rs.getString("email");
+            String senha = rs.getString("senha");
+
+            ClienteMODEL cliente = new ClienteMODEL(nomeCliente, cpf, dataNascimento, email, senha);
+            cliente.setId(rs.getInt("id_cliente"));
+            return cliente;
+            
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return null;
+        }
+    }
+    
+    
     public static ClienteMODEL selectCliente(int id_cliente) { // chamar esse metodo em SERVICE no metodo buscarFuncionario
        try {
            Connection conn = ConnectionUTIL.connectDB();
