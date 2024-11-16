@@ -36,11 +36,10 @@ public class ClienteDAO {
     public static void updateCliente(ClienteMODEL cliente) {
         try {
             Connection conn = ConnectionUTIL.connectDB();
-            String sql = "UPDATE clientes SET email = ?, senha = ? WHERE cpf = ?";
+            String sql = "UPDATE clientes SET senha = ? WHERE cpf = ?";
             PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setString(1, cliente.getEmail());
-            pstm.setString(2, cliente.getSenha());
-            pstm.setString(3, cliente.getCpf());
+            pstm.setString(1, cliente.getSenha());
+            pstm.setString(2, cliente.getCpf());
             pstm.executeUpdate();
             pstm.close();
             
@@ -51,7 +50,7 @@ public class ClienteDAO {
         }
     }
     
-    public static void deleteCliente(ClienteMODEL cliente) {
+    public static boolean deleteCliente(ClienteMODEL cliente) {
          try {
              Connection conn = ConnectionUTIL.connectDB();
              String sql = "DELETE FROM clientes WHERE id_cliente = ?";
@@ -60,12 +59,16 @@ public class ClienteDAO {
              pstm.executeUpdate();
              pstm.close();
              JOptionPane.showMessageDialog(null, "Cliente DELETADO com sucesso!");
+             return true;
              
          } catch(SQLException e) {
              JOptionPane.showMessageDialog(null, e.getMessage());
+             return false;
          }
     }
-    
+    // cogito deletar o metodo abaixo, uma vez que ele nao sera util
+    // em buscas onde existam varios clientes com o mesmo nome
+    /*
     public static ClienteMODEL selectClienteNome(String nomeCliente) {
         try {
             Connection conn = ConnectionUTIL.connectDB();
@@ -89,8 +92,32 @@ public class ClienteDAO {
             JOptionPane.showMessageDialog(null, e.getMessage());
             return null;
         }
-    }
+    }*/
     
+        public static ClienteMODEL selectClienteCpf(String cpf) {
+        try {
+            Connection conn = ConnectionUTIL.connectDB();
+            String sql = "SELECT * FROM clientes WHERE cpf = ?";
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            ResultSet rs = pstm.executeQuery();
+            rs.first();
+            java.sql.Date dataNascimentoSQL = rs.getDate("data_nascimento");
+            SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
+            String dataNascimento = formatador.format(dataNascimentoSQL);
+            String nome = rs.getString("nome_cliente");
+            String email = rs.getString("email");
+            String senha = rs.getString("senha");
+
+            ClienteMODEL cliente = new ClienteMODEL(nome, cpf, dataNascimento, email, senha);
+            cliente.setId(rs.getInt("id_cliente"));
+            return cliente;
+            
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return null;
+        }
+    }
     
     public static ClienteMODEL selectCliente(int id_cliente) { // chamar esse metodo em SERVICE no metodo buscarFuncionario
        try {

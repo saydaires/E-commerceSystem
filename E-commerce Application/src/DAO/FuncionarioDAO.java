@@ -96,11 +96,10 @@ public class FuncionarioDAO {
     public static void updateFuncionario(FuncionarioMODEL funcionario) {
        try {
            Connection conn = ConnectionUTIL.connectDB();
-           String sql = "UPDATE funcionarios SET email = ?, senha = ? WHERE id_funcionario = ?";
+           String sql = "UPDATE funcionarios SET senha = ? WHERE id_funcionario = ?";
            PreparedStatement pstm = conn.prepareStatement(sql);
-           pstm.setString(1, funcionario.getEmail());
-           pstm.setString(2, funcionario.getSenha());
-           pstm.setInt(3, funcionario.getId());
+           pstm.setString(1, funcionario.getSenha());
+           pstm.setInt(2, funcionario.getId());
            pstm.executeUpdate();
            pstm.close();
            JOptionPane.showMessageDialog(null, "Funcionario ATUALIZADO com sucesso!");
@@ -110,7 +109,7 @@ public class FuncionarioDAO {
        }
     }
     
-     public static void deleteFuncionario(FuncionarioMODEL funcionario) {
+     public static boolean deleteFuncionario(FuncionarioMODEL funcionario) {
          try {
              Connection conn = ConnectionUTIL.connectDB();
              String sql = "DELETE FROM funcionarios WHERE id_funcionario = ?";
@@ -119,9 +118,11 @@ public class FuncionarioDAO {
              pstm.executeUpdate();
              pstm.close();
              JOptionPane.showMessageDialog(null, "Funcionario DELETADO com sucesso!");
+             return true;
              
          } catch(SQLException e) {
              JOptionPane.showMessageDialog(null, e.getMessage());
+             return false;
          }
      }
 }

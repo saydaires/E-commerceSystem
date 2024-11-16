@@ -125,7 +125,7 @@ public class ProdutoDAO {
        }
     }
     
-     public static void deleteProduto(ProdutoMODEL produto) {
+     public static boolean deleteProduto(ProdutoMODEL produto) {
          try {
              Connection conn = ConnectionUTIL.connectDB();
              String sql = "DELETE FROM produtos WHERE id_produto = ?";
@@ -134,9 +134,11 @@ public class ProdutoDAO {
              pstm.executeUpdate();
              pstm.close();
              JOptionPane.showMessageDialog(null, "Produto DELETADO com sucesso!");
+             return true;
              
          } catch(SQLException e) {
              JOptionPane.showMessageDialog(null, e.getMessage());
+             return false;
          }
      }
 }
