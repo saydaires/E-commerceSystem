@@ -46,7 +46,7 @@ public class CategoriaDAO {
             return null;
         }
     }
-    
+    /*
     public static CategoriaMODEL selectCategoriaId(int id_categoria) {
         try {
             Connection conn = ConnectionUTIL.connectDB();
@@ -64,7 +64,7 @@ public class CategoriaDAO {
             return null;
         }
     }
-    
+    */
     public static List<CategoriaMODEL> listCategorias() {
         List<CategoriaMODEL> categorias = new ArrayList<>();
 

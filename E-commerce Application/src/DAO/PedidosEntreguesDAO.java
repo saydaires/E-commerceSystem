@@ -13,7 +13,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class PedidosEntreguesDAO {
-    public void insertPedidoEntregue(PedidosEntreguesMODEL pedidoEntregue) throws ParseException {
+    public static void insertPedidoEntregue(PedidosEntreguesMODEL pedidoEntregue) throws ParseException {
         try {
             Connection conn = ConnectionUTIL.connectDB();
             String sql = "INSERT INTO pedidos_entregues(id_pedido, data_entrega) VALUES(?, ?)";

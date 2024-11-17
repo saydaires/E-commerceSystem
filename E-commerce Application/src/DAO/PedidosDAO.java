@@ -100,7 +100,7 @@ public class PedidosDAO {
         return pedidos;
     }
     
-    public static void deletePedido(int id_pedido) {
+    public static boolean deletePedido(int id_pedido) {
         try {    
             Connection conn = ConnectionUTIL.connectDB();
             String sql = "DELETE FROM pedidos WHERE id_pedido = ?";
@@ -109,8 +109,10 @@ public class PedidosDAO {
             pstm.executeUpdate();
             pstm.close();
             JOptionPane.showMessageDialog(null, "Pedido DELETADO com sucesso!");
+            return true;
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
+            return false;
         }
     }
     

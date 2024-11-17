@@ -33,7 +33,7 @@ public class CuponsDescontoDAO {
         }
     }
     
-    public static void deleteCupom(String codigo_cupom) {
+    public static boolean deleteCupom(String codigo_cupom) {
         try {
             Connection conn = ConnectionUTIL.connectDB();
             String sql = "DELETE FROM cupons_desconto WHERE codigo_cupom = ?";
@@ -42,9 +42,11 @@ public class CuponsDescontoDAO {
             pstm.executeUpdate();
             pstm.close();
             JOptionPane.showMessageDialog(null, "Cupom de desconto DELETADO com sucesso!");
+            return true;
         
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
+            return false;
         }
     }
     
