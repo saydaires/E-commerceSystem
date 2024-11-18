@@ -5,10 +5,14 @@
         <group>
             <file>file:/C:/Users/aires/OneDrive/Área%20de%20Trabalho/E-commerceSystem/E-commerce%20Application/src/DAO/ProdutoDAO.java</file>
             <file>file:/C:/Users/aires/OneDrive/Área%20de%20Trabalho/E-commerceSystem/E-commerce%20Application/src/DAO/PedidosDAO.java</file>
+            <file>file:/C:/Users/aires/OneDrive/Área%20de%20Trabalho/E-commerceSystem/E-commerce%20Application/src/VIEW/FXMLBoxClienteController.java</file>
+            <file>file:/C:/Users/aires/OneDrive/Área%20de%20Trabalho/E-commerceSystem/E-commerce%20Application/src/VIEW/FXMLBoxCliente.fxml</file>
             <file>file:/C:/Users/aires/OneDrive/Área%20de%20Trabalho/E-commerceSystem/E-commerce%20Application/src/MODEL/PedidosMODEL.java</file>
             <file>file:/C:/Users/aires/OneDrive/Área%20de%20Trabalho/E-commerceSystem/E-commerce%20Application/src/DAO/ItensPedidosDAO.java</file>
             <file>file:/C:/Users/aires/OneDrive/Área%20de%20Trabalho/E-commerceSystem/E-commerce%20Application/src/DAO/CuponsDescontoDAO.java</file>
+            <file>file:/C:/Users/aires/OneDrive/Área%20de%20Trabalho/E-commerceSystem/E-commerce%20Application/src/VIEW/FXMLBoxClienteTesteController.java</file>
             <file>file:/C:/Users/aires/OneDrive/Área%20de%20Trabalho/E-commerceSystem/E-commerce%20Application/src/MODEL/ItensPedidosMODEL.java</file>
+            <file>file:/C:/Users/aires/OneDrive/Área%20de%20Trabalho/E-commerceSystem/E-commerce%20Application/src/VIEW/FXMLBoxClienteTeste.fxml</file>
         </group>
     </open-files>
 </project-private>
