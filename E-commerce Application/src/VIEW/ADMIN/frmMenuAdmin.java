@@ -15,6 +15,7 @@ public class frmMenuAdmin extends javax.swing.JFrame {
      */
     public frmMenuAdmin() {
         initComponents();
+        setResizable(false);
     }
 
     /**

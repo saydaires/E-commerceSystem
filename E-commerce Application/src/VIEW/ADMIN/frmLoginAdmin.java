@@ -16,6 +16,7 @@ public class frmLoginAdmin extends javax.swing.JFrame {
      */
     public frmLoginAdmin() {
         initComponents();
+        setResizable(false);
     }
 
     /**
@@ -189,7 +190,8 @@ public class frmLoginAdmin extends javax.swing.JFrame {
         String senha = String.valueOf(txtSenha.getPassword());
         if(Login.validarLogin(email, senha)) {
             frmMenuAdmin menuAdmin = new frmMenuAdmin();
-            menuAdmin.setVisible(true);
+            menuAdmin.setVisible(true); // chama o menu de administrador
+            this.dispose(); // fecha a tela de login após o login bem sucedido
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
