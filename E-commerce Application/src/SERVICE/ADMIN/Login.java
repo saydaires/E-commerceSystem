@@ -22,10 +22,13 @@ public class Login {
             String senhaBD = rs.getString("senha");
             if(senhaBD.equals(senha))
                 return true;
-        
+            else
+                JOptionPane.showMessageDialog(null, "Email ou Senha invalidos!");
+            return false;
+            
         } catch(SQLException e) {
-            //JOptionPane.showMessageDialog(null, e.getMessage()); -- teste
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return false;
         }
-        return false;
     }
 }
