@@ -213,11 +213,20 @@ public class frmCadastro extends javax.swing.JFrame {
         int precoUnitario = (Integer) spinnerPreco.getValue();
         String codProduto = txtCod.getText();
         String categoria = txtCategoria.getText();
+        if(nomeProduto.equals("") || codProduto.equals("")|| categoria.equals("")) {
+            JOptionPane.showMessageDialog(null, "Existem campos vazios!");
+            return;
+        }
         Integer id_categoria = BuscarCategoria.buscarIdCategoria(categoria.toLowerCase());
         if(id_categoria == null) 
             return; // encerra o metodo
         
         ProdutoSERVICE.cadastrarProduto(nomeProduto, codProduto, qtdEstoque, precoUnitario, id_categoria);
+        txtCategoria.setText("");
+        txtNome.setText("");
+        txtCod.setText("");
+        spinnerQtd.setValue(0);
+        spinnerPreco.setValue(0);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void txtCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoriaActionPerformed

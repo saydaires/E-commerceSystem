@@ -4,6 +4,7 @@
  */
 package VIEW.ADMIN;
 
+import VIEW.ADMIN.CategoriasCRUD.frmMenuCategorias;
 import VIEW.ADMIN.ProdutosCRUD.frmMenuProdutos;
 
 /**
@@ -186,7 +187,9 @@ public class frmMenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProdutosActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        frmMenuCategorias menuCategorias = new frmMenuCategorias();
+        menuCategorias.setVisible(true);
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed

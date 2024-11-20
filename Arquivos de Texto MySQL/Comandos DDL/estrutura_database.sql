@@ -12,7 +12,7 @@ CREATE TABLE clientes(
 
 CREATE TABLE categorias(
 	id_categoria INT PRIMARY KEY AUTO_INCREMENT,
-    nome_categoria VARCHAR(100) NOT NULL,
+    nome_categoria VARCHAR(100) UNIQUE KEY NOT NULL,
     descricao TEXT
 );
 
