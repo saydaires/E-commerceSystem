@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PedidosDAO {
+    // esse metodo sera utilizado
+    // quando o cliente optar por realizar uma compra
     public static void insertPedido(PedidosMODEL pedido) throws ParseException {
         try {
             Connection conn = ConnectionUTIL.connectDB();

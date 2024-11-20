@@ -34,4 +34,24 @@ public class BuscarCategoria {
             return null;
         }
     }
+    
+    public static String buscarNomeCategoria(int id_categoria) {
+        try {    
+            Connection conn = ConnectionUTIL.connectDB();
+            String sql = "SELECT nome_categoria FROM categorias WHERE id_categoria = ?";
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, id_categoria);
+            ResultSet rs = pstm.executeQuery();
+            if(!rs.isBeforeFirst()) {
+                JOptionPane.showMessageDialog(null, "Categoria inexistente!");
+                return null;
+            }
+            rs.first();
+            return rs.getString("nome_categoria");
+
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, "Categoria inexistente!");
+            return null;
+        }
+    }
 }

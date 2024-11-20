@@ -59,11 +59,9 @@
                                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel3" max="32767" attributes="0"/>
                                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="spinnerPreco" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="spinnerQtd" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
-                                          </Group>
+                                          <Component id="spinnerPreco" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="spinnerQtd" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
                                           <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -113,9 +111,9 @@
                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Component id="spinnerPreco" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">

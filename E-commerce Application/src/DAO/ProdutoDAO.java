@@ -51,7 +51,7 @@ public class ProdutoDAO {
             return produto;
             
         } catch(SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, "Produto Inexistente!");
             return null;
         }
     }
@@ -76,7 +76,7 @@ public class ProdutoDAO {
             return produto;
             
         } catch(SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, "Produto Inexistente!");
             return null;
         }
     }

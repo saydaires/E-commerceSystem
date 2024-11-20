@@ -27,8 +27,7 @@ public class ProdutoSERVICE {
         return ProdutoDAO.deleteProduto(produtoDeletar);
     }
     
-    public static void atualizarProduto(String codigo, double novoPreco, int novaQtdEstoque) {
-        ProdutoMODEL produtoUpdate = ProdutoDAO.selectProdutoCodigo(codigo);
+    public static void atualizarProduto(ProdutoMODEL produtoUpdate, double novoPreco, int novaQtdEstoque) {
         produtoUpdate.setPrecoUnitario(novoPreco);
         produtoUpdate.setQtdEstoque(novaQtdEstoque);
         ProdutoDAO.updateProduto(produtoUpdate);

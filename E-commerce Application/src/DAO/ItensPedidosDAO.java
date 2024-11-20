@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItensPedidosDAO {
+    // esse procedimento sera
+    // sera automatizado com uma trigger
     
     public static void insertItemPedido(ItensPedidosMODEL itemPedido) {
         try {
@@ -31,6 +33,8 @@ public class ItensPedidosDAO {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
+    
+    
     // O metodo 'deleteItemPedido' nao e necessario, uma vez que um 'itemPedido' sera deletado
     // no banco de dados sempre que um pedido em 'pedidos' for deletado (ON DELETE CASCADE)
 
