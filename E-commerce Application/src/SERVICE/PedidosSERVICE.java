@@ -27,7 +27,11 @@ public class PedidosSERVICE {
     }
     
     public static boolean deletarPedido(int id_pedido) {
-        return PedidosDAO.deletePedido(id_pedido);
+        PedidosMODEL pedido = PedidosDAO.selectPedido(id_pedido);
+        if(pedido == null)
+            return false;
+        
+        return PedidosDAO.deletePedido(pedido.getIdPedido());
     }
     
     public static void atualizarStatusPedido(int id_pedido, StatusPedido novoStatus) {

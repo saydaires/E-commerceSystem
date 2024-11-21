@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package VIEW.ADMIN.ClientesCRUD;
+package VIEW.ADMIN.PedidosCRUD;
 
-import MODEL.ClienteMODEL;
-import SERVICE.ClienteSERVICE;
+import MODEL.PedidosMODEL;
+import SERVICE.PedidosSERVICE;
 import VIEW.ADMIN.frmMenuAdmin;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -17,16 +17,17 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author aires
  */
-public class frmMenuClientes extends javax.swing.JFrame {
+public class frmMenuPedidos extends javax.swing.JFrame {
+    List<Integer> idPedidosBuscados = new ArrayList<>();
 
     /**
-     * Creates new form frmMenuClientes
+     * Creates new form frmMenuPedidos
      */
-    public frmMenuClientes() {
+    public frmMenuPedidos() {
         initComponents();
         setResizable(false);
-        DefaultTableModel tableModel = (DefaultTableModel) tableClientes.getModel(); 
-        tableModel.setRowCount(0);
+         DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
+         tableModel.setRowCount(0);
     }
 
     /**
@@ -43,24 +44,25 @@ public class frmMenuClientes extends javax.swing.JFrame {
         btnDeletar = new javax.swing.JButton();
         btnRetorno2 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        tableClientes = new javax.swing.JTable();
-        txtCpf = new javax.swing.JTextField();
+        tablePedidos = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         btnLimparTable = new javax.swing.JButton();
-        btnListarClientes = new javax.swing.JButton();
+        btnListarPedidos = new javax.swing.JButton();
+        spinnerId = new javax.swing.JSpinner();
+        btnAtualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("MENU DE CLIENTES");
+        jLabel3.setText("MENU DE PEDIDOS");
 
         btnDeletar.setBackground(new java.awt.Color(153, 0, 0));
         btnDeletar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDeletar.setForeground(new java.awt.Color(255, 255, 255));
-        btnDeletar.setText("DELETAR CLIENTE");
+        btnDeletar.setText("DELETAR PEDIDO");
         btnDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeletarActionPerformed(evt);
@@ -74,29 +76,22 @@ public class frmMenuClientes extends javax.swing.JFrame {
             }
         });
 
-        tableClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tablePedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Email", "Data Nascimento", "CPF"
+                "ID", "ID Cliente", "Data Pedido", "Status Pedido"
             }
         ));
-        jScrollPane5.setViewportView(tableClientes);
-
-        txtCpf.setToolTipText("");
-        txtCpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCpfActionPerformed(evt);
-            }
-        });
+        jScrollPane5.setViewportView(tablePedidos);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("CPF CLIENTE");
+        jLabel4.setText("ID PEDIDO ");
 
         btnBuscar.setText("BUSCAR");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -112,10 +107,20 @@ public class frmMenuClientes extends javax.swing.JFrame {
             }
         });
 
-        btnListarClientes.setText("LISTAR CLIENTES");
-        btnListarClientes.addActionListener(new java.awt.event.ActionListener() {
+        btnListarPedidos.setText("LISTAR PEDIDOS");
+        btnListarPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarClientesActionPerformed(evt);
+                btnListarPedidosActionPerformed(evt);
+            }
+        });
+
+        btnAtualizar.setBackground(new java.awt.Color(51, 102, 255));
+        btnAtualizar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAtualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtualizar.setText("ATUALIZAR STATUS");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
             }
         });
 
@@ -123,11 +128,12 @@ public class frmMenuClientes extends javax.swing.JFrame {
         jDesktopPane3.setLayer(btnDeletar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane3.setLayer(btnRetorno2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane3.setLayer(jScrollPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane3.setLayer(txtCpf, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane3.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane3.setLayer(btnBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane3.setLayer(btnLimparTable, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane3.setLayer(btnListarClientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane3.setLayer(btnListarPedidos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane3.setLayer(spinnerId, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane3.setLayer(btnAtualizar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane3Layout = new javax.swing.GroupLayout(jDesktopPane3);
         jDesktopPane3.setLayout(jDesktopPane3Layout);
@@ -135,28 +141,34 @@ public class frmMenuClientes extends javax.swing.JFrame {
             jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
             .addGroup(jDesktopPane3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnRetorno2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jDesktopPane3Layout.createSequentialGroup()
-                .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane3Layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnBuscar)
-                            .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                                    .addComponent(txtCpf)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnLimparTable)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
-                .addComponent(btnListarClientes)
+                        .addComponent(btnLimparTable)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnListarPedidos))
+                    .addGroup(jDesktopPane3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDesktopPane3Layout.createSequentialGroup()
+                                .addComponent(btnRetorno2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(112, 112, 112)
+                                .addComponent(jLabel3)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jDesktopPane3Layout.createSequentialGroup()
+                                .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jDesktopPane3Layout.createSequentialGroup()
+                        .addGap(239, 239, 239)
+                        .addComponent(jLabel4)))
                 .addContainerGap())
+            .addGroup(jDesktopPane3Layout.createSequentialGroup()
+                .addGap(211, 211, 211)
+                .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(spinnerId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDesktopPane3Layout.setVerticalGroup(
             jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,17 +178,19 @@ public class frmMenuClientes extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(btnRetorno2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnDeletar)
-                .addGap(18, 18, 18)
+                .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDeletar)
+                    .addComponent(btnAtualizar))
+                .addGap(47, 47, 47)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(spinnerId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBuscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimparTable)
-                    .addComponent(btnListarClientes))
+                    .addComponent(btnListarPedidos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -209,57 +223,59 @@ public class frmMenuClientes extends javax.swing.JFrame {
         frmMenuAdmin menuAdmin = new frmMenuAdmin();
         menuAdmin.setVisible(true);
     }//GEN-LAST:event_btnRetorno2ActionPerformed
-    List<String> cpfBuscados = new ArrayList<>();
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        int idPedido = (Integer) spinnerId.getValue();
+        PedidosMODEL pedido = PedidosSERVICE.buscarPedido(idPedido);
+
+        if(pedido != null && !idPedidosBuscados.contains(idPedido)) {
+            DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
+            idPedidosBuscados.add(pedido.getIdPedido());
+            java.util.Date dataPedido = null;
+            try {
+                dataPedido = pedido.getDataPedido();
+            } catch(ParseException e) {
+                JOptionPane.showMessageDialog(null, "Data mal formatada!");
+                return;
+            }
+
+            Object[] registro = {pedido.getIdPedido(), pedido.getIdCliente(), dataPedido, pedido.getStatusPedido()};
+            tableModel.addRow(registro);
+        }
+        spinnerId.setValue(0);
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     private void btnLimparTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparTableActionPerformed
-        DefaultTableModel tableModel = (DefaultTableModel) tableClientes.getModel();
-        cpfBuscados.clear(); 
+        DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
+        idPedidosBuscados.clear();
         tableModel.setRowCount(0);
     }//GEN-LAST:event_btnLimparTableActionPerformed
 
-    private void btnListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarClientesActionPerformed
-        DefaultTableModel tableModel = (DefaultTableModel) tableClientes.getModel();
+    private void btnListarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPedidosActionPerformed
+        DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
         tableModel.setRowCount(0); // limpar a tabela se ja possuir linhas inseridas
-        List<ClienteMODEL> listaClientes = ClienteSERVICE.listarClientes();
-        for(ClienteMODEL cliente : listaClientes) {
-            cpfBuscados.add(cliente.getCpf());
-            java.sql.Date dataNascimento = null;
-            
+        List<PedidosMODEL> listaPedidos = PedidosSERVICE.listarPedidos();
+        for(PedidosMODEL pedido : listaPedidos) {
+            idPedidosBuscados.add(pedido.getIdPedido());
+            java.sql.Date dataPedido = null;
+
             try {
-                dataNascimento = cliente.getData();
+                dataPedido = pedido.getDataPedido();
             } catch(ParseException e) {
                 JOptionPane.showMessageDialog(null, "Data mal formatada!");
                 return;
             }
-            
-            Object[] registro = {cliente.getId(), cliente.getNome(), cliente.getEmail(), dataNascimento, cliente.getCpf()};
+
+            Object[] registro = {pedido.getIdPedido(), pedido.getIdCliente(), dataPedido, pedido.getStatusPedido()};
             tableModel.addRow(registro);
         }
-    }//GEN-LAST:event_btnListarClientesActionPerformed
+    }//GEN-LAST:event_btnListarPedidosActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String cpfCliente = txtCpf.getText();
-        ClienteMODEL cliente = ClienteSERVICE.buscarCliente(cpfCliente);
-
-        if(cliente != null && !cpfBuscados.contains(cpfCliente)) {
-            DefaultTableModel tableModel = (DefaultTableModel) tableClientes.getModel();
-            cpfBuscados.add(cpfCliente);
-            java.util.Date dataNascimento = null;
-            try {
-                dataNascimento = cliente.getData();
-            } catch(ParseException e) {
-                JOptionPane.showMessageDialog(null, "Data mal formatada!");
-                return;
-            }
-            
-            Object[] registro = {cliente.getId(), cliente.getNome(), cliente.getEmail(), dataNascimento, cliente.getCpf()};
-            tableModel.addRow(registro);
-        }
-        txtCpf.setText("");
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCpfActionPerformed
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        this.dispose();
+        frmAtualizar telaAtualizar = new frmAtualizar();
+        telaAtualizar.setVisible(true);
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,35 +294,36 @@ public class frmMenuClientes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmMenuClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmMenuPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmMenuClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmMenuPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmMenuClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmMenuPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmMenuClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmMenuPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmMenuClientes().setVisible(true);
+                new frmMenuPedidos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnLimparTable;
-    private javax.swing.JButton btnListarClientes;
+    private javax.swing.JButton btnListarPedidos;
     private javax.swing.JButton btnRetorno2;
     private javax.swing.JDesktopPane jDesktopPane3;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable tableClientes;
-    private javax.swing.JTextField txtCpf;
+    private javax.swing.JSpinner spinnerId;
+    private javax.swing.JTable tablePedidos;
     // End of variables declaration//GEN-END:variables
 }
