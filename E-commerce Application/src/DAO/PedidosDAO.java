@@ -60,6 +60,9 @@ public class PedidosDAO {
                     break;
                 case "ENVIADO" :
                     statusPedido = StatusPedido.ENVIADO;
+                    break;
+                case "ENTREGUE":
+                    statusPedido = StatusPedido.ENTREGUE;
             }
             
             PedidosMODEL pedido = new PedidosMODEL(rs.getInt("id_cliente"), dataPedido, statusPedido);
@@ -95,6 +98,9 @@ public class PedidosDAO {
                         break;
                     case "ENVIADO":
                         statusPedido = StatusPedido.ENVIADO;
+                        break;
+                    case "ENTREGUE":
+                        statusPedido = StatusPedido.ENTREGUE;
                 }
                 PedidosMODEL pedido = new PedidosMODEL(rs.getInt("id_cliente"), dataPedido, statusPedido);
                 pedido.setIdPedido(rs.getInt("id_pedido"));
