@@ -36,6 +36,10 @@ public class PedidosEntreguesDAO {
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setInt(1,  id_pedido_entregue);
             ResultSet rs = pstm.executeQuery();
+            if(!rs.isBeforeFirst()) {
+                JOptionPane.showMessageDialog(null, "Dados inexistentes!");
+                return null;
+            }
             rs.first();
             java.sql.Date dataEntregaSQL = rs.getDate("data_entrega");
             SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");

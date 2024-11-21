@@ -8,11 +8,13 @@ public class ItensPedidosMODEL {
     private  double precoUnitario; // inicializado nos metodos DAO: conexao BD com a tabela produtos
     private double valorTotal; // inicializado nos metodos DAO: conexao BD com a tabela cupons_desconto 
     
-    public ItensPedidosMODEL(int id_pedido, int id_produto, Integer id_cupom, int quantidade) {
+    public ItensPedidosMODEL(int id_pedido, int id_produto, Integer id_cupom, int quantidade, double precoUnitario, double valorTotal) {
         this.id_pedido = id_pedido;
         this.id_produto = id_produto;
         this.quantidade = quantidade;
         this.id_cupom = id_cupom;
+        this.precoUnitario = precoUnitario;
+        this.valorTotal = valorTotal;
     }
     
     public Integer getIdItemPedido() {
@@ -23,12 +25,12 @@ public class ItensPedidosMODEL {
         this.id_item_pedido = id_item_pedido;
     }
     
-    public void startPrecoUnitario(double precoUnitario) {
-        this.precoUnitario = precoUnitario;
+    public double getPrecoUnitario() {
+        return precoUnitario;
     }
     
-    public void startValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
+    public double getValorTotal() {
+        return valorTotal;
     }
     
     public int getIdPedido() {

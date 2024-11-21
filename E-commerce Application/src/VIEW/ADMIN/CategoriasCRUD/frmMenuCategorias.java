@@ -6,7 +6,7 @@ package VIEW.ADMIN.CategoriasCRUD;
 
 import MODEL.CategoriaMODEL;
 import SERVICE.CategoriaSERVICE;
-import VIEW.ADMIN.frmMenuAdmin;
+import VIEW.ADMIN.LoginMenuPrincipal.frmMenuAdmin;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -210,7 +210,7 @@ public class frmMenuCategorias extends javax.swing.JFrame {
 
     List<String> categorias = new ArrayList<>();
     private void btnBuscarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNomeActionPerformed
-        String nomeCategoria = txtNome.getText();
+        String nomeCategoria = txtNome.getText().toLowerCase();
         CategoriaMODEL categoriaBuscada = CategoriaSERVICE.buscarCategoria(nomeCategoria);
 
         if(categoriaBuscada != null && !categorias.contains(nomeCategoria)) {

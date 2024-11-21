@@ -2,10 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package VIEW.ADMIN.ProdutosCRUD;
+package VIEW.ADMIN.LoginMenuPrincipal;
 
-import SERVICE.ADMIN.BuscarCategoria;
-import SERVICE.ProdutoSERVICE;
+import SERVICE.FuncionarioSERVICE;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,53 +35,49 @@ public class frmCadastro extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        spinnerQtd = new javax.swing.JSpinner();
-        spinnerPreco = new javax.swing.JSpinner();
         txtNome = new javax.swing.JTextField();
-        txtCategoria = new javax.swing.JTextField();
-        txtCod = new javax.swing.JTextField();
+        txtCpf = new javax.swing.JTextField();
+        txtData = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         btnCadastrar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         btnRetorno = new javax.swing.JButton();
+        txtEmail = new javax.swing.JTextField();
+        txtSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("NOME PRODUTO");
+        jLabel1.setText("NOME FUNCIONÁRIO");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("CATEGORIA");
+        jLabel2.setText("CPF");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("QUANTIDADE EM ESTOQUE");
+        jLabel3.setText("EMAIL");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("PREÇO UNITÁRIO");
+        jLabel5.setText("SENHA");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("CÓDIGO PRODUTO");
+        jLabel6.setText("DATA ADMISSÃO");
 
-        spinnerPreco.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                spinnerPrecoStateChanged(evt);
-            }
-        });
-
-        txtCategoria.addActionListener(new java.awt.event.ActionListener() {
+        txtCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCategoriaActionPerformed(evt);
+                txtCpfActionPerformed(evt);
             }
         });
+
+        txtData.setText("aaaa - MM - dd");
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("CADASTRO DE PRODUTOS");
+        jLabel4.setText("CADASTRAR FUNCIONÁRIO");
 
         btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICONS/cadastrar.png"))); // NOI18N
         btnCadastrar.setText("jButton1");
@@ -108,15 +103,15 @@ public class frmCadastro extends javax.swing.JFrame {
         jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(spinnerQtd, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(spinnerPreco, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(txtNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(txtCategoria, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(txtCod, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(txtCpf, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(txtData, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(btnCadastrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(btnRetorno, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(txtEmail, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(txtSenha, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -129,22 +124,23 @@ public class frmCadastro extends javax.swing.JFrame {
                         .addComponent(jLabel4))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane1Layout.createSequentialGroup()
                                 .addGap(31, 31, 31)
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel1)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel6)
-                                        .addComponent(spinnerPreco)
-                                        .addComponent(spinnerQtd)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtNome)))))
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(34, 34, 34))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtSenha)
+                                    .addComponent(txtCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                    .addComponent(txtNome)
+                                    .addComponent(txtEmail)
+                                    .addComponent(txtData, javax.swing.GroupLayout.Alignment.TRAILING))))
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addGap(51, 51, 51)
@@ -167,27 +163,27 @@ public class frmCadastro extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addGap(12, 12, 12)
-                        .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
-                        .addGap(12, 12, 12)
-                        .addComponent(spinnerQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
-                        .addGap(12, 12, 12)
-                        .addComponent(spinnerPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
@@ -206,42 +202,35 @@ public class frmCadastro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCpfActionPerformed
+
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
-        String nomeProduto = txtNome.getText().toLowerCase();
-        int qtdEstoque = (Integer) spinnerQtd.getValue();
-        int precoUnitario = (Integer) spinnerPreco.getValue();
-        String codProduto = txtCod.getText();
-        String categoria = txtCategoria.getText().toLowerCase();
-        if(nomeProduto.equals("") || codProduto.equals("")|| categoria.equals("")) {
+        String nome = txtNome.getText();
+        String cpf = txtCpf.getText();
+        String email = txtEmail.getText();
+        String senha = String.valueOf(txtSenha.getPassword());
+        String data = txtData.getText();
+        if(nome.equals("") || cpf.equals("")|| email.equals("") || senha.equals("") || data.equals("")) {
             JOptionPane.showMessageDialog(null, "Existem campos vazios!");
             return;
         }
-        Integer id_categoria = BuscarCategoria.buscarIdCategoria(categoria.toLowerCase());
-        if(id_categoria == null) 
-            return; // encerra o metodo
         
-        ProdutoSERVICE.cadastrarProduto(nomeProduto, codProduto, qtdEstoque, precoUnitario, id_categoria);
-        txtCategoria.setText("");
+        FuncionarioSERVICE.cadastrarFuncionario(nome, cpf, data, email, senha);
+        txtCpf.setText("");
         txtNome.setText("");
-        txtCod.setText("");
-        spinnerQtd.setValue(0);
-        spinnerPreco.setValue(0);
+        txtData.setText("");
+        txtSenha.setText("");
+        txtEmail.setText("");
     }//GEN-LAST:event_btnCadastrarActionPerformed
-
-    private void txtCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCategoriaActionPerformed
-
-    private void spinnerPrecoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerPrecoStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_spinnerPrecoStateChanged
 
     private void btnRetornoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetornoActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        frmMenuProdutos menuProdutos = new frmMenuProdutos();
-        menuProdutos.setVisible(true);
+        frmLoginAdmin menuLogin = new frmLoginAdmin();
+        menuLogin.setVisible(true);
     }//GEN-LAST:event_btnRetornoActionPerformed
 
     /**
@@ -290,10 +279,10 @@ public class frmCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JSpinner spinnerPreco;
-    private javax.swing.JSpinner spinnerQtd;
-    private javax.swing.JTextField txtCategoria;
-    private javax.swing.JTextField txtCod;
+    private javax.swing.JTextField txtCpf;
+    private javax.swing.JTextField txtData;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 }

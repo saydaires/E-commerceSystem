@@ -172,7 +172,7 @@ public class frmCadastro extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
-        String nomeCategoria = txtNome.getText();
+        String nomeCategoria = txtNome.getText().toLowerCase();
         String descricao = txtDescricao.getText();
         if(nomeCategoria.equals("") || descricao.equals("")) {
             JOptionPane.showMessageDialog(null, "Existem campos vazios!");

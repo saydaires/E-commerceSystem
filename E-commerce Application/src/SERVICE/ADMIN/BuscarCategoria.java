@@ -23,14 +23,14 @@ public class BuscarCategoria {
             pstm.setString(1, nomeCategoria);
             ResultSet rs = pstm.executeQuery();
             if(!rs.isBeforeFirst()) {
-                JOptionPane.showMessageDialog(null, "Categoria inexistente!");
+                JOptionPane.showMessageDialog(null, "Cadastre essa categoria!");
                 return null;
             }
             rs.first();
             return rs.getInt("id_categoria");
             
         } catch(SQLException e) {
-            JOptionPane.showMessageDialog(null, "Categoria inexistente!");
+            JOptionPane.showMessageDialog(null, "Cadastre essa categoria!");
             return null;
         }
     }
@@ -43,14 +43,14 @@ public class BuscarCategoria {
             pstm.setInt(1, id_categoria);
             ResultSet rs = pstm.executeQuery();
             if(!rs.isBeforeFirst()) {
-                JOptionPane.showMessageDialog(null, "Categoria inexistente!");
+                JOptionPane.showMessageDialog(null, "Cadastre essa categoria!");
                 return null;
             }
             rs.first();
             return rs.getString("nome_categoria");
 
         } catch(SQLException e) {
-            JOptionPane.showMessageDialog(null, "Categoria inexistente!");
+            JOptionPane.showMessageDialog(null, "Cadastre essa categoria!");
             return null;
         }
     }

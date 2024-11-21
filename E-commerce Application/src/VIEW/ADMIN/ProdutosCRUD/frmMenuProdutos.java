@@ -6,7 +6,7 @@ package VIEW.ADMIN.ProdutosCRUD;
 
 import MODEL.ProdutoMODEL;
 import SERVICE.ProdutoSERVICE;
-import VIEW.ADMIN.frmMenuAdmin;
+import VIEW.ADMIN.LoginMenuPrincipal.frmMenuAdmin;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -353,7 +353,7 @@ public class frmMenuProdutos extends javax.swing.JFrame {
     List<String> codigosProdutos = new ArrayList<>(); // evitar que um produto ja buscado seja floodado na tabela
     
     private void btnBuscarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNomeActionPerformed
-        String nomeProduto = txtNome.getText();
+        String nomeProduto = txtNome.getText().toLowerCase();
         ProdutoMODEL produtoBuscado = ProdutoSERVICE.buscarProdutoNome(nomeProduto);
         
         if(produtoBuscado != null && !codigosProdutos.contains(produtoBuscado.getCod())) {

@@ -2,11 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package VIEW.ADMIN;
+package VIEW.ADMIN.LoginMenuPrincipal;
 
 import VIEW.ADMIN.CategoriasCRUD.frmMenuCategorias;
 import VIEW.ADMIN.ClientesCRUD.frmMenuClientes;
+import VIEW.ADMIN.ItensPedidosCRUD.frmMenuItensPedidos;
 import VIEW.ADMIN.PedidosCRUD.frmMenuPedidos;
+import VIEW.ADMIN.PedidosEntregueSCRUD.frmPedidosEntregues;
 import VIEW.ADMIN.ProdutosCRUD.frmMenuProdutos;
 
 /**
@@ -39,7 +41,7 @@ public class frmMenuAdmin extends javax.swing.JFrame {
         btnClientes = new javax.swing.JButton();
         btnPedidos = new javax.swing.JButton();
         btnItensPedidos = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnPedidosEntregues = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnRetorno = new javax.swing.JButton();
@@ -82,7 +84,12 @@ public class frmMenuAdmin extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setText("PEDIDOS ENTREGUES");
+        btnPedidosEntregues.setText("PEDIDOS ENTREGUES");
+        btnPedidosEntregues.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidosEntreguesActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -108,7 +115,7 @@ public class frmMenuAdmin extends javax.swing.JFrame {
         jDesktopPane2.setLayer(btnClientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(btnPedidos, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(btnItensPedidos, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane2.setLayer(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane2.setLayer(btnPedidosEntregues, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(btnRetorno, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -127,7 +134,7 @@ public class frmMenuAdmin extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnItensPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPedidosEntregues, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane2Layout.createSequentialGroup()
@@ -164,7 +171,7 @@ public class frmMenuAdmin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClientes)
-                    .addComponent(jButton6))
+                    .addComponent(btnPedidosEntregues))
                 .addGap(26, 26, 26)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -206,7 +213,9 @@ public class frmMenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPedidosActionPerformed
 
     private void btnItensPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItensPedidosActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        frmMenuItensPedidos menuItensPedidos = new frmMenuItensPedidos();
+        menuItensPedidos.setVisible(true);
     }//GEN-LAST:event_btnItensPedidosActionPerformed
 
     private void btnRetornoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetornoActionPerformed
@@ -219,6 +228,12 @@ public class frmMenuAdmin extends javax.swing.JFrame {
         frmMenuClientes menuCliente = new frmMenuClientes();
         menuCliente.setVisible(true);
     }//GEN-LAST:event_btnClientesActionPerformed
+
+    private void btnPedidosEntreguesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosEntreguesActionPerformed
+        this.dispose();
+        frmPedidosEntregues menuPedidosEntregues = new frmPedidosEntregues();
+        menuPedidosEntregues.setVisible(true);
+    }//GEN-LAST:event_btnPedidosEntreguesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,9 +275,9 @@ public class frmMenuAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnItensPedidos;
     private javax.swing.JButton btnPedidos;
+    private javax.swing.JButton btnPedidosEntregues;
     private javax.swing.JButton btnProdutos;
     private javax.swing.JButton btnRetorno;
-    private javax.swing.JButton jButton6;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

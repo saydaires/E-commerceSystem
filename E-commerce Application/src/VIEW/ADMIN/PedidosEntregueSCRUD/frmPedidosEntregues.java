@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package VIEW.ADMIN.ClientesCRUD;
+package VIEW.ADMIN.PedidosEntregueSCRUD;
 
-import MODEL.ClienteMODEL;
-import SERVICE.ClienteSERVICE;
+import MODEL.PedidosEntreguesMODEL;
+import SERVICE.PedidosEntreguesSERVICE;
 import VIEW.ADMIN.LoginMenuPrincipal.frmMenuAdmin;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -17,15 +17,15 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author aires
  */
-public class frmMenuClientes extends javax.swing.JFrame {
-
+public class frmPedidosEntregues extends javax.swing.JFrame {
+    List<Integer> idPedidosEntregues = new ArrayList<>();
     /**
-     * Creates new form frmMenuClientes
+     * Creates new form frmPedidosEntregues
      */
-    public frmMenuClientes() {
+    public frmPedidosEntregues() {
         initComponents();
         setResizable(false);
-        DefaultTableModel tableModel = (DefaultTableModel) tableClientes.getModel(); 
+        DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
         tableModel.setRowCount(0);
     }
 
@@ -40,32 +40,21 @@ public class frmMenuClientes extends javax.swing.JFrame {
 
         jDesktopPane3 = new javax.swing.JDesktopPane();
         jLabel3 = new javax.swing.JLabel();
-        btnDeletar = new javax.swing.JButton();
         btnRetorno2 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        tableClientes = new javax.swing.JTable();
-        txtCpf = new javax.swing.JTextField();
+        tablePedidos = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         btnLimparTable = new javax.swing.JButton();
-        btnListarClientes = new javax.swing.JButton();
+        btnListarPedidos = new javax.swing.JButton();
+        spinnerId = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("MENU DE CLIENTES");
-
-        btnDeletar.setBackground(new java.awt.Color(153, 0, 0));
-        btnDeletar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnDeletar.setForeground(new java.awt.Color(255, 255, 255));
-        btnDeletar.setText("DELETAR CLIENTE");
-        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeletarActionPerformed(evt);
-            }
-        });
+        jLabel3.setText("MENU DE PEDIDOS ENTREGUES");
 
         btnRetorno2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICONS/return.png"))); // NOI18N
         btnRetorno2.addActionListener(new java.awt.event.ActionListener() {
@@ -74,29 +63,22 @@ public class frmMenuClientes extends javax.swing.JFrame {
             }
         });
 
-        tableClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tablePedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Email", "Data Nascimento", "CPF"
+                "ID", "ID Pedido", "Data Entrega"
             }
         ));
-        jScrollPane5.setViewportView(tableClientes);
-
-        txtCpf.setToolTipText("");
-        txtCpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCpfActionPerformed(evt);
-            }
-        });
+        jScrollPane5.setViewportView(tablePedidos);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("CPF CLIENTE");
+        jLabel4.setText("ID PEDIDO ");
 
         btnBuscar.setText("BUSCAR");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -112,22 +94,21 @@ public class frmMenuClientes extends javax.swing.JFrame {
             }
         });
 
-        btnListarClientes.setText("LISTAR CLIENTES");
-        btnListarClientes.addActionListener(new java.awt.event.ActionListener() {
+        btnListarPedidos.setText("LISTAR PEDIDOS ENTREGUES");
+        btnListarPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarClientesActionPerformed(evt);
+                btnListarPedidosActionPerformed(evt);
             }
         });
 
         jDesktopPane3.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane3.setLayer(btnDeletar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane3.setLayer(btnRetorno2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane3.setLayer(jScrollPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane3.setLayer(txtCpf, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane3.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane3.setLayer(btnBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane3.setLayer(btnLimparTable, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane3.setLayer(btnListarClientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane3.setLayer(btnListarPedidos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane3.setLayer(spinnerId, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane3Layout = new javax.swing.GroupLayout(jDesktopPane3);
         jDesktopPane3.setLayout(jDesktopPane3Layout);
@@ -135,48 +116,50 @@ public class frmMenuClientes extends javax.swing.JFrame {
             jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
             .addGroup(jDesktopPane3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnRetorno2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jDesktopPane3Layout.createSequentialGroup()
-                .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane3Layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnBuscar)
-                            .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                                    .addComponent(txtCpf)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnLimparTable)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
-                .addComponent(btnListarClientes)
+                        .addComponent(btnLimparTable)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnListarPedidos))
+                    .addGroup(jDesktopPane3Layout.createSequentialGroup()
+                        .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDesktopPane3Layout.createSequentialGroup()
+                                .addGap(211, 211, 211)
+                                .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(spinnerId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnBuscar)))
+                            .addGroup(jDesktopPane3Layout.createSequentialGroup()
+                                .addGap(223, 223, 223)
+                                .addComponent(jLabel4))
+                            .addGroup(jDesktopPane3Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnRetorno2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(jLabel3)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jDesktopPane3Layout.setVerticalGroup(
             jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(btnRetorno2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnDeletar)
-                .addGap(18, 18, 18)
+                .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane3Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnRetorno2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDesktopPane3Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabel3)))
+                .addGap(69, 69, 69)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(spinnerId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBuscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimparTable)
-                    .addComponent(btnListarClientes))
+                    .addComponent(btnListarPedidos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -195,71 +178,62 @@ public class frmMenuClientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Evento de risco! Cuidado");
-        this.dispose();
-        frmDeletar telaDeletar = new frmDeletar();
-        telaDeletar.setVisible(true);
-    }//GEN-LAST:event_btnDeletarActionPerformed
-
     private void btnRetorno2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetorno2ActionPerformed
         // TODO add your handling code here:
         this.dispose();
         frmMenuAdmin menuAdmin = new frmMenuAdmin();
         menuAdmin.setVisible(true);
     }//GEN-LAST:event_btnRetorno2ActionPerformed
-    List<String> cpfBuscados = new ArrayList<>();
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        int idPedidoEntregue = (Integer) spinnerId.getValue();
+        PedidosEntreguesMODEL pedidoEntregue = PedidosEntreguesSERVICE.buscarPedidoEntregue(idPedidoEntregue);
+
+        if(pedidoEntregue != null && !idPedidosEntregues.contains(idPedidoEntregue)) {
+            DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
+            idPedidosEntregues.add(pedidoEntregue.getIdPedidoEntregue());
+            
+            java.util.Date dataEntrega = null;
+            try {
+                dataEntrega = pedidoEntregue.getData();
+            } catch(ParseException e) {
+                JOptionPane.showMessageDialog(null, "Data mal formatada!");
+                return;
+            }
+
+            Object[] registro = {pedidoEntregue.getIdPedidoEntregue(), pedidoEntregue.getIdPedido(), dataEntrega};
+            tableModel.addRow(registro);
+        }
+        spinnerId.setValue(0);
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     private void btnLimparTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparTableActionPerformed
-        DefaultTableModel tableModel = (DefaultTableModel) tableClientes.getModel();
-        cpfBuscados.clear(); 
+        DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
+        idPedidosEntregues.clear();
         tableModel.setRowCount(0);
     }//GEN-LAST:event_btnLimparTableActionPerformed
 
-    private void btnListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarClientesActionPerformed
-        DefaultTableModel tableModel = (DefaultTableModel) tableClientes.getModel();
+    private void btnListarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPedidosActionPerformed
+
+        DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
         tableModel.setRowCount(0); // limpar a tabela se ja possuir linhas inseridas
-        List<ClienteMODEL> listaClientes = ClienteSERVICE.listarClientes();
-        for(ClienteMODEL cliente : listaClientes) {
-            cpfBuscados.add(cliente.getCpf());
-            java.sql.Date dataNascimento = null;
+        List<PedidosEntreguesMODEL> listaPedidosEntregues = PedidosEntreguesSERVICE.listarPedidosEntregues();
+
+        for(PedidosEntreguesMODEL pedidoEntregue : listaPedidosEntregues) {
+            idPedidosEntregues.add(pedidoEntregue.getIdPedidoEntregue());
             
+            java.util.Date dataEntrega = null;
             try {
-                dataNascimento = cliente.getData();
+                dataEntrega = pedidoEntregue.getData();
             } catch(ParseException e) {
                 JOptionPane.showMessageDialog(null, "Data mal formatada!");
                 return;
             }
-            
-            Object[] registro = {cliente.getId(), cliente.getNome(), cliente.getEmail(), dataNascimento, cliente.getCpf()};
+
+            Object[] registro = {pedidoEntregue.getIdPedidoEntregue(), pedidoEntregue.getIdPedido(), dataEntrega};
             tableModel.addRow(registro);
         }
-    }//GEN-LAST:event_btnListarClientesActionPerformed
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String cpfCliente = txtCpf.getText();
-        ClienteMODEL cliente = ClienteSERVICE.buscarCliente(cpfCliente);
-
-        if(cliente != null && !cpfBuscados.contains(cpfCliente)) {
-            DefaultTableModel tableModel = (DefaultTableModel) tableClientes.getModel();
-            cpfBuscados.add(cpfCliente);
-            java.util.Date dataNascimento = null;
-            try {
-                dataNascimento = cliente.getData();
-            } catch(ParseException e) {
-                JOptionPane.showMessageDialog(null, "Data mal formatada!");
-                return;
-            }
-            
-            Object[] registro = {cliente.getId(), cliente.getNome(), cliente.getEmail(), dataNascimento, cliente.getCpf()};
-            tableModel.addRow(registro);
-        }
-        txtCpf.setText("");
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCpfActionPerformed
+    }//GEN-LAST:event_btnListarPedidosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,35 +252,34 @@ public class frmMenuClientes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmMenuClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmPedidosEntregues.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmMenuClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmPedidosEntregues.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmMenuClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmPedidosEntregues.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmMenuClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmPedidosEntregues.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmMenuClientes().setVisible(true);
+                new frmPedidosEntregues().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnLimparTable;
-    private javax.swing.JButton btnListarClientes;
+    private javax.swing.JButton btnListarPedidos;
     private javax.swing.JButton btnRetorno2;
     private javax.swing.JDesktopPane jDesktopPane3;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable tableClientes;
-    private javax.swing.JTextField txtCpf;
+    private javax.swing.JSpinner spinnerId;
+    private javax.swing.JTable tablePedidos;
     // End of variables declaration//GEN-END:variables
 }

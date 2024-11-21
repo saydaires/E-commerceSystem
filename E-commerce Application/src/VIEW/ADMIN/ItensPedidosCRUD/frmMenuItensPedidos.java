@@ -2,32 +2,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package VIEW.ADMIN.PedidosCRUD;
+package VIEW.ADMIN.ItensPedidosCRUD;
 
-import MODEL.PedidosMODEL;
-import SERVICE.PedidosSERVICE;
+import MODEL.ItensPedidosMODEL;
+import SERVICE.ItensPedidosSERVICE;
 import VIEW.ADMIN.LoginMenuPrincipal.frmMenuAdmin;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author aires
  */
-public class frmMenuPedidos extends javax.swing.JFrame {
-    List<Integer> idPedidosBuscados = new ArrayList<>();
+public class frmMenuItensPedidos extends javax.swing.JFrame {
+    List<Integer> idItensPedidosBuscados = new ArrayList<>();
 
     /**
-     * Creates new form frmMenuPedidos
+     * Creates new form frmMenuItensPedidos
      */
-    public frmMenuPedidos() {
+    public frmMenuItensPedidos() {
         initComponents();
         setResizable(false);
-         DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
-         tableModel.setRowCount(0);
+        DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
+        tableModel.setRowCount(0);
     }
 
     /**
@@ -41,7 +39,6 @@ public class frmMenuPedidos extends javax.swing.JFrame {
 
         jDesktopPane3 = new javax.swing.JDesktopPane();
         jLabel3 = new javax.swing.JLabel();
-        btnDeletar = new javax.swing.JButton();
         btnRetorno2 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tablePedidos = new javax.swing.JTable();
@@ -50,24 +47,13 @@ public class frmMenuPedidos extends javax.swing.JFrame {
         btnLimparTable = new javax.swing.JButton();
         btnListarPedidos = new javax.swing.JButton();
         spinnerId = new javax.swing.JSpinner();
-        btnAtualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("MENU DE PEDIDOS");
-
-        btnDeletar.setBackground(new java.awt.Color(153, 0, 0));
-        btnDeletar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnDeletar.setForeground(new java.awt.Color(255, 255, 255));
-        btnDeletar.setText("DELETAR PEDIDO");
-        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeletarActionPerformed(evt);
-            }
-        });
+        jLabel3.setText("MENU DE ITENS PEDIDOS");
 
         btnRetorno2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICONS/return.png"))); // NOI18N
         btnRetorno2.addActionListener(new java.awt.event.ActionListener() {
@@ -78,20 +64,20 @@ public class frmMenuPedidos extends javax.swing.JFrame {
 
         tablePedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "ID Cliente", "Data Pedido", "Status Pedido"
+                "ID", "ID Pedido", "ID Produto", "ID Cupom", "Quantidade", "Preço Unitário", "Valor Total"
             }
         ));
         jScrollPane5.setViewportView(tablePedidos);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("ID PEDIDO ");
+        jLabel4.setText("ID ITEM PEDIDO ");
 
         btnBuscar.setText("BUSCAR");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -107,25 +93,14 @@ public class frmMenuPedidos extends javax.swing.JFrame {
             }
         });
 
-        btnListarPedidos.setText("LISTAR PEDIDOS");
+        btnListarPedidos.setText("LISTAR ITENS PEDIDOS");
         btnListarPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListarPedidosActionPerformed(evt);
             }
         });
 
-        btnAtualizar.setBackground(new java.awt.Color(51, 102, 255));
-        btnAtualizar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnAtualizar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAtualizar.setText("ATUALIZAR STATUS");
-        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtualizarActionPerformed(evt);
-            }
-        });
-
         jDesktopPane3.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane3.setLayer(btnDeletar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane3.setLayer(btnRetorno2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane3.setLayer(jScrollPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane3.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -133,7 +108,6 @@ public class frmMenuPedidos extends javax.swing.JFrame {
         jDesktopPane3.setLayer(btnLimparTable, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane3.setLayer(btnListarPedidos, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane3.setLayer(spinnerId, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane3.setLayer(btnAtualizar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane3Layout = new javax.swing.GroupLayout(jDesktopPane3);
         jDesktopPane3.setLayout(jDesktopPane3Layout);
@@ -149,39 +123,34 @@ public class frmMenuPedidos extends javax.swing.JFrame {
                         .addComponent(btnListarPedidos))
                     .addGroup(jDesktopPane3Layout.createSequentialGroup()
                         .addContainerGap()
+                        .addComponent(btnRetorno2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(66, 66, 66)
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jDesktopPane3Layout.createSequentialGroup()
                         .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDesktopPane3Layout.createSequentialGroup()
-                                .addComponent(btnRetorno2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(112, 112, 112)
-                                .addComponent(jLabel3)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(211, 211, 211)
+                                .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(spinnerId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnBuscar)))
                             .addGroup(jDesktopPane3Layout.createSequentialGroup()
-                                .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jDesktopPane3Layout.createSequentialGroup()
-                        .addGap(239, 239, 239)
-                        .addComponent(jLabel4)))
+                                .addGap(223, 223, 223)
+                                .addComponent(jLabel4)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jDesktopPane3Layout.createSequentialGroup()
-                .addGap(211, 211, 211)
-                .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spinnerId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDesktopPane3Layout.setVerticalGroup(
             jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(btnRetorno2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDeletar)
-                    .addComponent(btnAtualizar))
-                .addGap(47, 47, 47)
+                .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane3Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnRetorno2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDesktopPane3Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jLabel3)))
+                .addGap(80, 80, 80)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spinnerId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -209,14 +178,6 @@ public class frmMenuPedidos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Evento de risco! Cuidado");
-        this.dispose();
-        frmDeletar telaDeletar = new frmDeletar();
-        telaDeletar.setVisible(true);
-    }//GEN-LAST:event_btnDeletarActionPerformed
-
     private void btnRetorno2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetorno2ActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -225,21 +186,15 @@ public class frmMenuPedidos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRetorno2ActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        int idPedido = (Integer) spinnerId.getValue();
-        PedidosMODEL pedido = PedidosSERVICE.buscarPedido(idPedido);
+        int idItemPedido = (Integer) spinnerId.getValue();
+        ItensPedidosMODEL itemPedido = ItensPedidosSERVICE.buscarItemPedido(idItemPedido);
 
-        if(pedido != null && !idPedidosBuscados.contains(idPedido)) {
+        if(itemPedido != null && !idItensPedidosBuscados.contains(idItemPedido)) {
             DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
-            idPedidosBuscados.add(pedido.getIdPedido());
-            java.util.Date dataPedido = null;
-            try {
-                dataPedido = pedido.getDataPedido();
-            } catch(ParseException e) {
-                JOptionPane.showMessageDialog(null, "Data mal formatada!");
-                return;
-            }
-
-            Object[] registro = {pedido.getIdPedido(), pedido.getIdCliente(), dataPedido, pedido.getStatusPedido()};
+            idItensPedidosBuscados.add(itemPedido.getIdItemPedido());
+            
+            Object[] registro = {itemPedido.getIdItemPedido(), itemPedido.getIdPedido(),itemPedido.getIdProduto(), 
+            itemPedido.getIdCupom(), itemPedido.getQuantidade(), itemPedido.getPrecoUnitario(), itemPedido.getValorTotal()};
             tableModel.addRow(registro);
         }
         spinnerId.setValue(0);
@@ -247,35 +202,24 @@ public class frmMenuPedidos extends javax.swing.JFrame {
 
     private void btnLimparTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparTableActionPerformed
         DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
-        idPedidosBuscados.clear();
+        idItensPedidosBuscados.clear();
         tableModel.setRowCount(0);
     }//GEN-LAST:event_btnLimparTableActionPerformed
 
     private void btnListarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPedidosActionPerformed
+        
         DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
         tableModel.setRowCount(0); // limpar a tabela se ja possuir linhas inseridas
-        List<PedidosMODEL> listaPedidos = PedidosSERVICE.listarPedidos();
-        for(PedidosMODEL pedido : listaPedidos) {
-            idPedidosBuscados.add(pedido.getIdPedido());
-            java.sql.Date dataPedido = null;
+        List<ItensPedidosMODEL> listaItensPedidos = ItensPedidosSERVICE.listarItensPedidos();
+        
+        for(ItensPedidosMODEL itemPedido : listaItensPedidos) {
+            idItensPedidosBuscados.add(itemPedido.getIdItemPedido());
 
-            try {
-                dataPedido = pedido.getDataPedido();
-            } catch(ParseException e) {
-                JOptionPane.showMessageDialog(null, "Data mal formatada!");
-                return;
-            }
-
-            Object[] registro = {pedido.getIdPedido(), pedido.getIdCliente(), dataPedido, pedido.getStatusPedido()};
+            Object[] registro = {itemPedido.getIdItemPedido(), itemPedido.getIdPedido(),itemPedido.getIdProduto(), 
+            itemPedido.getIdCupom(), itemPedido.getQuantidade(), itemPedido.getPrecoUnitario(), itemPedido.getValorTotal()};
             tableModel.addRow(registro);
         }
     }//GEN-LAST:event_btnListarPedidosActionPerformed
-
-    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        this.dispose();
-        frmAtualizar telaAtualizar = new frmAtualizar();
-        telaAtualizar.setVisible(true);
-    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -294,28 +238,26 @@ public class frmMenuPedidos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmMenuPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmMenuItensPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmMenuPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmMenuItensPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmMenuPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmMenuItensPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmMenuPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmMenuItensPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmMenuPedidos().setVisible(true);
+                new frmMenuItensPedidos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnLimparTable;
     private javax.swing.JButton btnListarPedidos;
     private javax.swing.JButton btnRetorno2;

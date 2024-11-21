@@ -23,8 +23,8 @@ public class ItensPedidosDAO {
             pstm.setInt(2, itemPedido.getIdProduto());
             pstm.setInt(3, itemPedido.getIdCupom());
             pstm.setInt(4, itemPedido.getQuantidade());
-            pstm.setDouble(5, getPrecoUnitario(itemPedido)); // consulta o BD na tabela produtos
-            pstm.setDouble(6, calcularValorTotal(itemPedido)); // consulta o BD na tabela cupons_desconto
+            pstm.setDouble(5, itemPedido.getPrecoUnitario()); 
+            pstm.setDouble(6, itemPedido.getValorTotal());
             pstm.execute();
             pstm.close();
             JOptionPane.showMessageDialog(null, "Pedido especificado com sucesso!");
@@ -41,16 +41,18 @@ public class ItensPedidosDAO {
     public static ItensPedidosMODEL selectItempedido(int id_item_pedido) {
         try {
             Connection conn = ConnectionUTIL.connectDB();
-            String sql = "SELECT * FROM itens_pedidos WHERE id_pedido = ?";
+            String sql = "SELECT * FROM itens_pedidos WHERE id_item_pedido = ?";
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setInt(1, id_item_pedido);
             ResultSet rs = pstm.executeQuery();
+            if(!rs.isBeforeFirst()) {
+                JOptionPane.showMessageDialog(null, "Dados inexistentes!");
+                return null;
+            }
             rs.first();
-            ItensPedidosMODEL itemPedido = new ItensPedidosMODEL(rs.getInt("id_pedido"), rs.getInt("id_produto"), rs.getInt("id_cupom"), rs.getInt("quantidade"));
-            
+            ItensPedidosMODEL itemPedido = new ItensPedidosMODEL(rs.getInt("id_pedido"), rs.getInt("id_produto"), rs.getInt("id_cupom"), 
+            rs.getInt("quantidade"), rs.getDouble("preco_unitario"), rs.getDouble("valor_total"));
             itemPedido.setIdItemPedido(id_item_pedido);
-            itemPedido.startPrecoUnitario(rs.getDouble("preco_unitario"));
-            itemPedido.startValorTotal(rs.getDouble("valor_total"));
             return itemPedido;
 
         } catch(SQLException e) {
@@ -77,10 +79,8 @@ public class ItensPedidosDAO {
                 double precoUnitario = rs.getDouble("preco_unitario");
                 double valorTotal = rs.getDouble("valor_total");
                 
-                ItensPedidosMODEL itemPedido = new ItensPedidosMODEL(idPedido, idProduto, idCupom, quantidade);
+                ItensPedidosMODEL itemPedido = new ItensPedidosMODEL(idPedido, idProduto, idCupom, quantidade, precoUnitario, valorTotal);
                 itemPedido.setIdItemPedido(id_item_pedido);
-                itemPedido.startPrecoUnitario(precoUnitario);
-                itemPedido.startValorTotal(valorTotal);
                 itensPedidos.add(itemPedido);
             }
             
@@ -89,7 +89,7 @@ public class ItensPedidosDAO {
         }
         return itensPedidos; 
     }  
-
+    /*
     public static double calcularValorTotal(ItensPedidosMODEL itemPedido) {
         if(itemPedido.getIdCupom() == null) { // o itemPedido nao possui cupom de desconto
             return getPrecoUnitario(itemPedido);
@@ -130,4 +130,5 @@ public class ItensPedidosDAO {
             return null;
         }
     }
+    */
 }
