@@ -22,6 +22,9 @@ public class ClienteSERVICE {
 
     public static boolean deletarCliente(String cpf) {
         ClienteMODEL clienteDeletar = ClienteDAO.selectClienteCpf(cpf);
+        if(clienteDeletar == null)
+            return false;
+        
         return ClienteDAO.deleteCliente(clienteDeletar);
     }
     

@@ -101,6 +101,10 @@ public class ClienteDAO {
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setString(1, cpf);
             ResultSet rs = pstm.executeQuery();
+            if(!rs.isBeforeFirst()) {
+                JOptionPane.showMessageDialog(null, "Dados inexistentes!");
+                return null; 
+            }
             rs.first();
             java.sql.Date dataNascimentoSQL = rs.getDate("data_nascimento");
             SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");

@@ -5,6 +5,7 @@
 package VIEW.ADMIN;
 
 import VIEW.ADMIN.CategoriasCRUD.frmMenuCategorias;
+import VIEW.ADMIN.ClientesCRUD.frmMenuClientes;
 import VIEW.ADMIN.ProdutosCRUD.frmMenuProdutos;
 
 /**
@@ -60,6 +61,11 @@ public class frmMenuAdmin extends javax.swing.JFrame {
         });
 
         btnClientes.setText("CLIENTES");
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
 
         btnPedidos.setText("PEDIDOS");
         btnPedidos.addActionListener(new java.awt.event.ActionListener() {
@@ -204,6 +210,12 @@ public class frmMenuAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnRetornoActionPerformed
+
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        this.dispose();
+        frmMenuClientes menuCliente = new frmMenuClientes();
+        menuCliente.setVisible(true);
+    }//GEN-LAST:event_btnClientesActionPerformed
 
     /**
      * @param args the command line arguments
