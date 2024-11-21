@@ -12,7 +12,7 @@ CREATE TABLE clientes(
 
 CREATE TABLE categorias(
 	id_categoria INT PRIMARY KEY AUTO_INCREMENT,
-    nome_categoria VARCHAR(100) UNIQUE KEY NOT NULL,
+    nome_categoria VARCHAR(100) NOT NULL,
     descricao TEXT
 );
 
@@ -72,18 +72,6 @@ CREATE TABLE funcionarios(
     data_admissao DATE NOT NULL
 );
 
-CREATE TABLE avaliacoes(
-	id_avaliacao INT PRIMARY KEY AUTO_INCREMENT,
-    id_cliente INT NOT NULL, -- FK
-    id_produto INT NOT NULL, -- FK
-    nota INT NOT NULL,
-    CHECK(nota BETWEEN 0 AND 5), -- restringe avaliacoes/notas somente no intervalo de 0 a 5
-    comentario TEXT,
-    data_avaliacao DATE NOT NULL,
-    FOREIGN KEY(id_cliente) REFERENCES clientes(id_cliente),
-    FOREIGN KEY(id_produto) REFERENCES produtos(id_produto)
-);
-
 CREATE TABLE enderecos(
 	id_endereco INT PRIMARY KEY AUTO_INCREMENT,
     id_cliente INT NOT NULL, -- FK
@@ -101,5 +89,18 @@ CREATE TABLE pedidos_entregues(
 	id_pedido_entregue INT PRIMARY KEY AUTO_INCREMENT,
     id_pedido INT NOT NULL, -- FK
     data_entrega DATE NOT NULL,
-    FOREIGN KEY(id_pedido) REFERENCES pedidos(id_pedido)
+    FOREIGN KEY(id_pedido) REFERENCES pedidos(id_pedido) ON DELETE CASCADE
 );
+
+-- INSERTO INTO para testes no menu de ADMIN
+INSERT INTO clientes(nome_cliente, cpf, email, senha, data_nascimento)
+VALUES('Aquiles', '851', 'aquiles', 'DoguinhoAquilesNegao', '2003-04-30');
+
+INSERT INTO pedidos(id_cliente, data_pedido, status_pedido)
+VALUES(1, CURDATE(), 'PENDENTE');
+
+INSERT INTO itens_pedidos(id_pedido, id_produto, id_cupom, quantidade, preco_unitario, valor_total)
+VALUES(1, 1, null, 2, 8, 16);
+
+INSERT INTO pedidos_entregues(id_pedido, data_entrega)
+VALUES(1, CURDATE());
