@@ -8,9 +8,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class PedidosSERVICE {
-    public static void cadastrarPedido(int id_cliente, String dataPedido, StatusPedido statusPedido) {
+    public static void cadastrarPedido(int id_cliente, int codigoPedido, String dataPedido, StatusPedido statusPedido) {
         try {
-            PedidosMODEL pedido = new PedidosMODEL(id_cliente, dataPedido, statusPedido);
+            PedidosMODEL pedido = new PedidosMODEL(id_cliente, codigoPedido, dataPedido, statusPedido);
             PedidosDAO.insertPedido(pedido);
             
         } catch(ParseException e) {
@@ -20,6 +20,11 @@ public class PedidosSERVICE {
     
     public static PedidosMODEL buscarPedido(int id_pedido) {
         return PedidosDAO.selectPedido(id_pedido);
+    }
+    
+    
+    public static PedidosMODEL buscarPedidoCodigo(int codigoPedido) {
+        return PedidosDAO.selectPedidoCodigo(codigoPedido);
     }
     
     public static List<PedidosMODEL> listarPedidos() {

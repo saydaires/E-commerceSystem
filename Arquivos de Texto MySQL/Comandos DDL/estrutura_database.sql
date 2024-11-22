@@ -29,6 +29,7 @@ CREATE TABLE produtos(
 CREATE TABLE pedidos(
 	id_pedido INT PRIMARY KEY AUTO_INCREMENT,
     id_cliente INT NOT NULL, -- FK
+    codigo_pedido INT NOT NULL UNIQUE KEY,
     data_pedido DATE NOT NULL,
     status_pedido ENUM('PENDENTE', 'EM PROCESSAMENTO', 'ENVIADO', 'ENTREGUE') NOT NULL,
     FOREIGN KEY(id_cliente) REFERENCES clientes(id_cliente)
@@ -44,12 +45,14 @@ CREATE TABLE cupons_desconto(
 CREATE TABLE itens_pedidos(
 	id_item_pedido INT PRIMARY KEY AUTO_INCREMENT,
     id_pedido INT NOT NULL, -- FK
+    codigo_pedido INT NOT NULL, -- FK
     id_produto INT NOT NULL, -- FK
     id_cupom INT, -- pode ser null se o pedido nao possuir cupom de desconto
     quantidade INT NOT NULL,
     preco_unitario DECIMAL(10, 2) NOT NULL,
     valor_total DECIMAL(10, 2) NOT NULL, -- o valor total varia entre quantidade * preco_unitario ou (quantidade * preco_unitario) - desconto
     FOREIGN KEY(id_pedido) REFERENCES pedidos(id_pedido) ON DELETE CASCADE,
+    FOREIGN KEY(codigo_pedido) REFERENCES pedidos(codigo_pedido) ON DELETE CASCADE,
     FOREIGN KEY(id_cupom) REFERENCES cupons_desconto(id_cupom),
     FOREIGN KEY(id_produto) REFERENCES produtos(id_produto)
 );
@@ -91,16 +94,3 @@ CREATE TABLE pedidos_entregues(
     data_entrega DATE NOT NULL,
     FOREIGN KEY(id_pedido) REFERENCES pedidos(id_pedido) ON DELETE CASCADE
 );
-
--- INSERTO INTO para testes no menu de ADMIN
-INSERT INTO clientes(nome_cliente, cpf, email, senha, data_nascimento)
-VALUES('Aquiles', '851', 'aquiles', 'DoguinhoAquilesNegao', '2003-04-30');
-
-INSERT INTO pedidos(id_cliente, data_pedido, status_pedido)
-VALUES(1, CURDATE(), 'PENDENTE');
-
-INSERT INTO itens_pedidos(id_pedido, id_produto, id_cupom, quantidade, preco_unitario, valor_total)
-VALUES(1, 1, null, 2, 8, 16);
-
-INSERT INTO pedidos_entregues(id_pedido, data_entrega)
-VALUES(1, CURDATE());

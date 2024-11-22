@@ -7,12 +7,14 @@ public class PedidosMODEL {
     private Integer id_pedido;
     private final Integer id_cliente;
     private final String dataPedido;
+    private final int codigoPedido;
     private StatusPedido statusPedido;
     
-    public PedidosMODEL(Integer id_cliente, String dataPedido, StatusPedido statusPedido) {
+    public PedidosMODEL(Integer id_cliente, int codigoPedido, String dataPedido, StatusPedido statusPedido) {
         this.id_cliente = id_cliente;
         this.dataPedido = dataPedido;
         this.statusPedido = statusPedido;
+        this.codigoPedido = codigoPedido;
     }
     
     public Integer getIdPedido() {
@@ -31,6 +33,9 @@ public class PedidosMODEL {
         return statusPedido.getDescricao();
     }
     
+    public int getCodigoPedido() {
+        return codigoPedido;
+    }
     public java.sql.Date getDataPedido() throws ParseException {
         SimpleDateFormat dataPedidoFormatada = new SimpleDateFormat("yyyy-MM-dd");
 

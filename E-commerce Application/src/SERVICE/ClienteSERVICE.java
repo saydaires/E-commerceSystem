@@ -19,6 +19,10 @@ public class ClienteSERVICE {
     public static ClienteMODEL buscarCliente(String cpf) {
         return ClienteDAO.selectClienteCpf(cpf);
     }
+    
+    public static ClienteMODEL buscarClienteEmail(String email) {
+        return ClienteDAO.selectClienteEmail(email);
+    }
 
     public static boolean deletarCliente(String cpf) {
         ClienteMODEL clienteDeletar = ClienteDAO.selectClienteCpf(cpf);

@@ -123,19 +123,22 @@ public class ClienteDAO {
         }
     }
     
-    public static ClienteMODEL selectCliente(int id_cliente) { // chamar esse metodo em SERVICE no metodo buscarFuncionario
+    public static ClienteMODEL selectClienteEmail(String email) { 
        try {
            Connection conn = ConnectionUTIL.connectDB();
-           String sql = "SELECT * FROM clientes WHERE id_cliente = ?";
+           String sql = "SELECT * FROM clientes WHERE email = ?";
            PreparedStatement pstm = conn.prepareStatement(sql);
-           pstm.setInt(1, id_cliente);
+           pstm.setString(1, email);
            ResultSet rs = pstm.executeQuery();
+           if(!rs.isBeforeFirst()) {
+                JOptionPane.showMessageDialog(null, "Dados inexistentes!");
+                return null; 
+            }
            rs.first();
-
-           Integer idCliente = id_cliente;
+           
+           int idCliente = rs.getInt("id_cliente");
            String nome = rs.getString("nome_cliente");
            String cpf = rs.getString("cpf");
-           String email = rs.getString("email");
            String senha = rs.getString("senha");
            java.sql.Date data_nascimentoSQL = rs.getDate("data_nascimento"); 
            SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
