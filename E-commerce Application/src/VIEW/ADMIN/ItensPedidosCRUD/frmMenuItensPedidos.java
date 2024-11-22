@@ -64,13 +64,13 @@ public class frmMenuItensPedidos extends javax.swing.JFrame {
 
         tablePedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "ID Pedido", "ID Produto", "ID Cupom", "Quantidade", "Preço Unitário", "Valor Total"
+                "ID", "ID Pedido", "ID Produto", "Quantidade", "Preço Unitário", "Valor Total"
             }
         ));
         jScrollPane5.setViewportView(tablePedidos);
@@ -122,13 +122,12 @@ public class frmMenuItensPedidos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnListarPedidos))
                     .addGroup(jDesktopPane3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnRetorno2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jDesktopPane3Layout.createSequentialGroup()
                         .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDesktopPane3Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnRetorno2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(66, 66, 66)
+                                .addComponent(jLabel3))
                             .addGroup(jDesktopPane3Layout.createSequentialGroup()
                                 .addGap(211, 211, 211)
                                 .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,15 +185,17 @@ public class frmMenuItensPedidos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRetorno2ActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        idItensPedidosBuscados.clear();
+        DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
+        tableModel.setRowCount(0);
         int idItemPedido = (Integer) spinnerId.getValue();
         ItensPedidosMODEL itemPedido = ItensPedidosSERVICE.buscarItemPedido(idItemPedido);
 
         if(itemPedido != null && !idItensPedidosBuscados.contains(idItemPedido)) {
-            DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
             idItensPedidosBuscados.add(itemPedido.getIdItemPedido());
             
             Object[] registro = {itemPedido.getIdItemPedido(), itemPedido.getIdPedido(),itemPedido.getIdProduto(), 
-            itemPedido.getIdCupom(), itemPedido.getQuantidade(), itemPedido.getPrecoUnitario(), itemPedido.getValorTotal()};
+            itemPedido.getQuantidade(), itemPedido.getPrecoUnitario(), itemPedido.getValorTotal()};
             tableModel.addRow(registro);
         }
         spinnerId.setValue(0);
@@ -216,7 +217,7 @@ public class frmMenuItensPedidos extends javax.swing.JFrame {
             idItensPedidosBuscados.add(itemPedido.getIdItemPedido());
 
             Object[] registro = {itemPedido.getIdItemPedido(), itemPedido.getIdPedido(),itemPedido.getIdProduto(), 
-            itemPedido.getIdCupom(), itemPedido.getQuantidade(), itemPedido.getPrecoUnitario(), itemPedido.getValorTotal()};
+            itemPedido.getQuantidade(), itemPedido.getPrecoUnitario(), itemPedido.getValorTotal()};
             tableModel.addRow(registro);
         }
     }//GEN-LAST:event_btnListarPedidosActionPerformed

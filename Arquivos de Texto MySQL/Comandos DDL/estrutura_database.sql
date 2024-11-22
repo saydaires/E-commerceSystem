@@ -32,14 +32,7 @@ CREATE TABLE pedidos(
     codigo_pedido INT NOT NULL UNIQUE KEY,
     data_pedido DATE NOT NULL,
     status_pedido ENUM('PENDENTE', 'EM PROCESSAMENTO', 'ENVIADO', 'ENTREGUE') NOT NULL,
-    FOREIGN KEY(id_cliente) REFERENCES clientes(id_cliente)
-);
-
-CREATE TABLE cupons_desconto(
-	id_cupom INT PRIMARY KEY AUTO_INCREMENT,
-    codigo_cupom VARCHAR(10) UNIQUE NOT NULL,
-    percentual_desconto DECIMAL(5, 2) NOT NULL,
-    data_validade DATE NOT NULL
+    FOREIGN KEY(id_cliente) REFERENCES clientes(id_cliente) ON DELETE CASCADE
 );
 
 CREATE TABLE itens_pedidos(
@@ -47,23 +40,12 @@ CREATE TABLE itens_pedidos(
     id_pedido INT NOT NULL, -- FK
     codigo_pedido INT NOT NULL, -- FK
     id_produto INT NOT NULL, -- FK
-    id_cupom INT, -- pode ser null se o pedido nao possuir cupom de desconto
     quantidade INT NOT NULL,
     preco_unitario DECIMAL(10, 2) NOT NULL,
     valor_total DECIMAL(10, 2) NOT NULL, -- o valor total varia entre quantidade * preco_unitario ou (quantidade * preco_unitario) - desconto
     FOREIGN KEY(id_pedido) REFERENCES pedidos(id_pedido) ON DELETE CASCADE,
     FOREIGN KEY(codigo_pedido) REFERENCES pedidos(codigo_pedido) ON DELETE CASCADE,
-    FOREIGN KEY(id_cupom) REFERENCES cupons_desconto(id_cupom),
     FOREIGN KEY(id_produto) REFERENCES produtos(id_produto)
-);
-
-CREATE TABLE pagamentos(
-	id_pagamento INT PRIMARY KEY AUTO_INCREMENT,
-    id_pedido INT NOT NULL, -- FK
-    data_pagamento DATE NOT NULL,
-    valor_pago DECIMAL(10, 2) NOT NULL,
-    metodo_pagamento ENUM('CARTAO', 'BOLETO', 'PIX') NOT NULL,
-    FOREIGN KEY(id_pedido) REFERENCES pedidos(id_pedido)
 );
 
 CREATE TABLE funcionarios(
@@ -85,7 +67,7 @@ CREATE TABLE enderecos(
     cidade VARCHAR(100) NOT NULL,
     estado VARCHAR(50) NOT NULL,
     cep VARCHAR(8) NOT NULL,
-    FOREIGN KEY(id_cliente) REFERENCES clientes(id_cliente)
+    FOREIGN KEY(id_cliente) REFERENCES clientes(id_cliente) ON DELETE CASCADE
 );
 
 CREATE TABLE pedidos_entregues(

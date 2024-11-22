@@ -16,18 +16,18 @@ public class ItensPedidosDAO {
     public static void insertItemPedido(ItensPedidosMODEL itemPedido) {
         try {
             Connection conn = ConnectionUTIL.connectDB();
-            String sql = "INSERT INTO itens_pedidos(id_pedido, id_produto, id_cupom, quantidade, preco_unitario, valor_total)"
+            String sql = "INSERT INTO itens_pedidos(id_pedido, codigo_pedido, id_produto, quantidade, preco_unitario, valor_total)"
             + " VALUES(?, ?, ?, ?, ?, ?)";
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setInt(1, itemPedido.getIdPedido());
-            pstm.setInt(2, itemPedido.getIdProduto());
-            pstm.setInt(3, itemPedido.getIdCupom());
+            pstm.setInt(2, itemPedido.getCodigoPedido());
+            pstm.setInt(3, itemPedido.getIdProduto());
             pstm.setInt(4, itemPedido.getQuantidade());
             pstm.setDouble(5, itemPedido.getPrecoUnitario()); 
             pstm.setDouble(6, itemPedido.getValorTotal());
             pstm.execute();
             pstm.close();
-            JOptionPane.showMessageDialog(null, "Pedido especificado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Item Pedido especificado com sucesso!");
             
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -50,7 +50,7 @@ public class ItensPedidosDAO {
                 return null;
             }
             rs.first();
-            ItensPedidosMODEL itemPedido = new ItensPedidosMODEL(rs.getInt("id_pedido"), rs.getInt("id_produto"), rs.getInt("id_cupom"), 
+            ItensPedidosMODEL itemPedido = new ItensPedidosMODEL(rs.getInt("id_pedido"), rs.getInt("codigo_pedido"), rs.getInt("id_produto"), 
             rs.getInt("quantidade"), rs.getDouble("preco_unitario"), rs.getDouble("valor_total"));
             itemPedido.setIdItemPedido(id_item_pedido);
             return itemPedido;
@@ -73,13 +73,13 @@ public class ItensPedidosDAO {
             while(rs.next()) {
                 Integer id_item_pedido = rs.getInt("id_item_pedido");
                 int idPedido = rs.getInt("id_pedido");
+                int codigoPedido = rs.getInt("codigo_pedido");
                 int idProduto = rs.getInt("id_produto");
-                int idCupom = rs.getInt("id_cupom");
                 int quantidade = rs.getInt("quantidade");
                 double precoUnitario = rs.getDouble("preco_unitario");
                 double valorTotal = rs.getDouble("valor_total");
                 
-                ItensPedidosMODEL itemPedido = new ItensPedidosMODEL(idPedido, idProduto, idCupom, quantidade, precoUnitario, valorTotal);
+                ItensPedidosMODEL itemPedido = new ItensPedidosMODEL(idPedido, codigoPedido, idProduto, quantidade, precoUnitario, valorTotal);
                 itemPedido.setIdItemPedido(id_item_pedido);
                 itensPedidos.add(itemPedido);
             }
@@ -88,47 +88,5 @@ public class ItensPedidosDAO {
             JOptionPane.showMessageDialog(null, "Nenhum registro encontrado em clientes!");
         }
         return itensPedidos; 
-    }  
-    /*
-    public static double calcularValorTotal(ItensPedidosMODEL itemPedido) {
-        if(itemPedido.getIdCupom() == null) { // o itemPedido nao possui cupom de desconto
-            return getPrecoUnitario(itemPedido);
-        
-        } else {
-            try {
-            Connection conn = ConnectionUTIL.connectDB();
-            String sql = "SELECT percentual_desconto FROM cupons_desconto WHERE id_cupom = ?";
-            PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, itemPedido.getIdCupom());
-            ResultSet rs = pstm.executeQuery();
-            rs.first();
-            Double percentual_desconto = rs.getDouble("percentual_desconto");
-            
-            // calculo do precoTotal
-            Double desconto = (percentual_desconto/100) * (getPrecoUnitario(itemPedido) * itemPedido.getQuantidade()); 
-            return (getPrecoUnitario(itemPedido) * itemPedido.getQuantidade()) - desconto; // retorna o precoTotal com desconto
-            
-            } catch(SQLException e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
-                return getPrecoUnitario(itemPedido);
-            }
-        } // fim do bloco else   
-    }
-    
-    public static Double getPrecoUnitario(ItensPedidosMODEL itemPedido) { // nao pode ser private, pois usarei o metodo para passar valores para a tabela itens_pedido
-        try {
-            Connection conn = ConnectionUTIL.connectDB();
-            String sql = "SELECT preco_unitario FROM produtos WHERE id_produto = ?";
-            PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, itemPedido.getIdProduto());
-            ResultSet rs = pstm.executeQuery();
-            rs.first();
-            return rs.getDouble("preco_unitario");
-            
-        } catch(SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            return null;
-        }
-    }
-    */
+    } 
 }

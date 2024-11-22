@@ -73,7 +73,12 @@ public class frmCadastro extends javax.swing.JFrame {
             }
         });
 
-        txtData.setText("aaaa - MM - dd");
+        txtData.setText("aaaa-MM-dd");
+        txtData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDataActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -229,9 +234,13 @@ public class frmCadastro extends javax.swing.JFrame {
     private void btnRetornoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetornoActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        frmLoginAdmin menuLogin = new frmLoginAdmin();
+        AdministradorApp menuLogin = new AdministradorApp();
         menuLogin.setVisible(true);
     }//GEN-LAST:event_btnRetornoActionPerformed
+
+    private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataActionPerformed
 
     /**
      * @param args the command line arguments

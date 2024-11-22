@@ -18,13 +18,14 @@ public class ComprarProduto {
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String dataAtualFormatada = dataAtual.format(formatador);
         SecureRandom randomNumber = new SecureRandom();
-        int codigoAleatorio = randomNumber.nextInt(1000);
+        int codigoAleatorio = randomNumber.nextInt(2000);
         
         PedidosSERVICE.cadastrarPedido(cliente.getId(), codigoAleatorio, dataAtualFormatada, StatusPedido.EM_PROCESSAMENTO);
         PedidosMODEL pedidoGerado = PedidosSERVICE.buscarPedidoCodigo(codigoAleatorio);
         
-        ItensPedidosSERVICE.cadastrarItemPedido(pedidoGerado.getIdPedido(), produto.getIdProduto(), null, quantidadeProduto, 
-        produto.getPrecoUnitario(), quantidadeProduto * produto.getPrecoUnitario());
+        double valorTotal = quantidadeProduto * produto.getPrecoUnitario();
+        ItensPedidosSERVICE.cadastrarItemPedido(pedidoGerado.getIdPedido(), pedidoGerado.getCodigoPedido(), produto.getIdProduto(), quantidadeProduto, 
+        produto.getPrecoUnitario(), valorTotal);
         
         EnderecoSERVICE.cadastrarEndereco(endereco.getIdCliente(), endereco.getLogradouro(), endereco.getNumero(), 
         endereco.getComplemento(), endereco.getBairro(), endereco.getCidade(), endereco.getEstado(), endereco.getCep());

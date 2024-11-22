@@ -210,11 +210,13 @@ public class frmMenuCategorias extends javax.swing.JFrame {
 
     List<String> categorias = new ArrayList<>();
     private void btnBuscarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNomeActionPerformed
+        categorias.clear();
+        DefaultTableModel tableModel = (DefaultTableModel) tableProdutos.getModel();
+        tableModel.setRowCount(0);
         String nomeCategoria = txtNome.getText().toLowerCase();
         CategoriaMODEL categoriaBuscada = CategoriaSERVICE.buscarCategoria(nomeCategoria);
 
         if(categoriaBuscada != null && !categorias.contains(nomeCategoria)) {
-            DefaultTableModel tableModel = (DefaultTableModel) tableProdutos.getModel();
             categorias.add(nomeCategoria);
             Object[] registro = {categoriaBuscada.getId(), categoriaBuscada.getNomeCategoria(), categoriaBuscada.getDescricao()};
             tableModel.addRow(registro);

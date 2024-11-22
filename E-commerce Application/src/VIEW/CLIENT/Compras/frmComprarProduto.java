@@ -19,13 +19,15 @@ import javax.swing.JOptionPane;
  */
 public class frmComprarProduto extends javax.swing.JFrame {
     private static ProdutoMODEL produtoComprado;
+    private static ClienteMODEL clienteLogado;
     /**
      * Creates new form frmComprarProduto
      */
-    public frmComprarProduto(ProdutoMODEL produtoComprado) {
+    public frmComprarProduto(ProdutoMODEL produtoComprado, ClienteMODEL clienteLogado) {
         initComponents();
         setResizable(false);
         this.produtoComprado = produtoComprado;
+        this.clienteLogado = clienteLogado;
     }
 
     /**
@@ -75,6 +77,7 @@ public class frmComprarProduto extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("QUANTIDADE PRODUTO");
 
+        spinnerQtd.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         spinnerQtd.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spinnerQtdStateChanged(evt);
@@ -234,7 +237,6 @@ public class frmComprarProduto extends javax.swing.JFrame {
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -307,7 +309,7 @@ public class frmComprarProduto extends javax.swing.JFrame {
 
     private void btnRetornoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetornoActionPerformed
         this.dispose();
-        frmMenuClient menuCliente = new frmMenuClient(null);
+        frmMenuClient menuCliente = new frmMenuClient(clienteLogado);
         menuCliente.setVisible(true);
     }//GEN-LAST:event_btnRetornoActionPerformed
     private void txtNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroActionPerformed
@@ -344,11 +346,16 @@ public class frmComprarProduto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "CPF sem cadastro!");
             return;
         }
+        if(!clienteLogado.getCpf().equals(cliente.getCpf())) {
+            JOptionPane.showMessageDialog(null, "Erro ao digitar seu CPF.\nPor favor, tente novamente");
+            return;
+        }
+        
         EnderecoMODEL endereco = new EnderecoMODEL(cliente.getId(), logradouro, numero, complemento, bairro, cidade, estado, cep);
         ComprarProduto.gerarPedido(produtoComprado, cliente, endereco, qtdProduto);
         JOptionPane.showMessageDialog(null, "Compra efetuada com sucesso!\nPedido gerado!");
         this.dispose();
-        frmMenuComprar menuComprar = new frmMenuComprar(null);
+        frmMenuComprar menuComprar = new frmMenuComprar(clienteLogado);
         menuComprar.setVisible(true);
         /*txtLogradouro.setText("");
         txtCpf.setText("");
@@ -388,7 +395,7 @@ public class frmComprarProduto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmComprarProduto(produtoComprado).setVisible(true);
+                new frmComprarProduto(produtoComprado, clienteLogado).setVisible(true);
             }
         });
     }

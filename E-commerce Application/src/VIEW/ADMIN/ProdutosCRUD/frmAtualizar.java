@@ -55,6 +55,9 @@ public class frmAtualizar extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("PREÇO UNITÁRIO");
 
+        spinnerQtd.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
+        spinnerPreco.setModel(new javax.swing.SpinnerNumberModel(1.0d, 1.0d, null, 1.0d));
         spinnerPreco.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spinnerPrecoStateChanged(evt);
@@ -176,7 +179,7 @@ public class frmAtualizar extends javax.swing.JFrame {
         // TODO add your handling code here:
         String codProduto = txtCod.getText();
         int qtdEstoque = (Integer) spinnerQtd.getValue();
-        int precoUnitario = (Integer) spinnerPreco.getValue();
+        double precoUnitario = (Double) spinnerPreco.getValue();
         ProdutoMODEL produto = ProdutoSERVICE.buscarProdutoCodigo(codProduto);
         if(produto == null)
             return; // encerra o metodo
@@ -184,7 +187,7 @@ public class frmAtualizar extends javax.swing.JFrame {
         ProdutoSERVICE.atualizarProduto(produto, precoUnitario, qtdEstoque);
         txtCod.setText("");
         spinnerQtd.setValue(0);
-        spinnerPreco.setValue(0);   
+        spinnerPreco.setValue(1);   
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnRetornoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetornoActionPerformed

@@ -1,0 +1,98 @@
+USE ecommerce_db;
+
+-- Inserindo dados em clientes
+INSERT INTO clientes (nome_cliente, cpf, email, senha, data_nascimento) VALUES
+('João Silva', '12345678901', 'joao@email.com', 'senha123', '1990-01-01'),
+('Maria Oliveira', '23456789012', 'maria@email.com', 'senha456', '1992-05-15'),
+('Carlos Pereira', '34567890123', 'carlos@email.com', 'senha789', '1988-08-30'),
+('Ana Santos', '45678901234', 'ana@email.com', 'senhaabc', '1995-12-20'),
+('Paulo Lima', '56789012345', 'paulo@email.com', 'senhadef', '1980-11-11'),
+('Beatriz Souza', '67890123456', 'beatriz@email.com', 'senha1234', '1993-07-07'),
+('Rafael Costa', '78901234567', 'rafael@email.com', 'senha5678', '1985-02-25'),
+('Fernanda Alves', '89012345678', 'fernanda@email.com', 'senha91011', '1998-09-09'),
+('Lucas Rocha', '90123456789', 'lucas@email.com', 'senha1314', '2000-06-06'),
+('Patrícia Mendes', '01234567890', 'patricia@email.com', 'senha1516', '1994-03-03');
+
+-- Inserindo dados em categorias
+INSERT INTO categorias (nome_categoria, descricao) VALUES
+('eletrônicos', 'Dispositivos eletrônicos e acessórios.'),
+('móveis', 'Itens de mobiliário para casa e escritório.'),
+('livros', 'Literatura, técnicos e escolares.'),
+('vestuário', 'Roupas, calçados e acessórios de moda.'),
+('esporte', 'Equipamentos e acessórios esportivos.'),
+('brinquedos', 'Brinquedos e jogos para crianças.'),
+('alimentos', 'Comidas e bebidas não perecíveis.'),
+('cosméticos', 'Produtos de beleza e cuidados pessoais.'),
+('ferramentas', 'Equipamentos e ferramentas manuais.'),
+('petshop', 'Produtos para animais de estimação.');
+
+-- Inserindo dados em produtos
+INSERT INTO produtos (nome_produto, cod_produto, preco_unitario, qtd_estoque, id_categoria) VALUES
+('notebook dell', 'PROD001', 4500.00, 20, 1),
+('cadeira gamer', 'PROD002', 1500.00, 15, 2),
+('livro de java', 'PROD003', 120.00, 50, 3),
+('camiseta branca', 'PROD004', 40.00, 100, 4),
+('bola de futebol', 'PROD005', 80.00, 30, 5),
+('boneca barbie', 'PROD006', 150.00, 25, 6),
+('chocolate amargo', 'PROD007', 12.00, 200, 7),
+('batom vermelho', 'PROD008', 25.00, 80, 8),
+('furadeira elétrica', 'PROD009', 350.00, 10, 9),
+('ração para cães', 'PROD010', 100.00, 50, 10);
+
+-- Inserindo dados em pedidos
+INSERT INTO pedidos (id_cliente, codigo_pedido, data_pedido, status_pedido) VALUES
+(1, 1001, '2024-11-20', 'PENDENTE'),
+(2, 1002, '2024-11-21', 'EM PROCESSAMENTO'),
+(3, 1003, '2024-11-22', 'ENVIADO'),
+(4, 1004, '2024-11-23', 'ENTREGUE'),
+(5, 1005, '2024-11-24', 'PENDENTE'),
+(6, 1006, '2024-11-25', 'EM PROCESSAMENTO'),
+(7, 1007, '2024-11-26', 'ENVIADO'),
+(8, 1008, '2024-11-27', 'ENTREGUE'),
+(9, 1009, '2024-11-28', 'PENDENTE'),
+(10, 1010, '2024-11-29', 'ENTREGUE');
+
+-- Inserindo dados em itens_pedidos
+INSERT INTO itens_pedidos (id_pedido, codigo_pedido, id_produto, quantidade, preco_unitario, valor_total) VALUES
+(1, 1001, 1, 1, 4500.00, 4500.00),
+(2, 1002, 2, 2, 1500.00, 3000.00),
+(3, 1003, 3, 3, 120.00, 360.00),
+(4, 1004, 4, 4, 40.00, 160.00),
+(5, 1005, 5, 5, 80.00, 400.00),
+(6, 1006, 6, 6, 150.00, 900.00),
+(7, 1007, 7, 10, 12.00, 120.00),
+(8, 1008, 8, 8, 25.00, 200.00),
+(9, 1009, 9, 1, 350.00, 350.00),
+(10, 1010, 10, 1, 100.00, 100.00);
+
+-- Inserindo dados em funcionários
+INSERT INTO funcionarios (nome_funcionario, cpf, email, senha, data_admissao) VALUES
+('Roberto Lima', '11111111111', 'roberto@email.com', 'senha001', '2020-01-01'),
+('Clara Mendes', '22222222222', 'clara@email.com', 'senha002', '2021-02-01'),
+('Diego Souza', '33333333333', 'diego@email.com', 'senha003', '2022-03-01'),
+('Sofia Rocha', '44444444444', 'sofia@email.com', 'senha004', '2023-04-01'),
+('Marcos Silva', '55555555555', 'marcos@email.com', 'senha005', '2019-05-01'),
+('Helena Costa', '66666666666', 'helena@email.com', 'senha006', '2018-06-01'),
+('Ricardo Alves', '77777777777', 'ricardo@email.com', 'senha007', '2017-07-01'),
+('Laura Matos', '88888888888', 'laura@email.com', 'senha008', '2021-08-01'),
+('Fernando Lima', '99999999999', 'fernando@email.com', 'senha009', '2016-09-01'),
+('Patrícia Ribeiro', '00000000000', 'patricia@email.com', 'senha010', '2024-10-01');
+
+-- Inserindo dados em endereços
+INSERT INTO enderecos (id_cliente, logradouro, numero, complemento, bairro, cidade, estado, cep) VALUES
+(1, 'Rua A', '100', NULL, 'Centro', 'São Paulo', 'SP', '01001000'),
+(2, 'Rua B', '200', 'Apto 1', 'Bairro B', 'Rio de Janeiro', 'RJ', '22290000'),
+(3, 'Rua C', '300', NULL, 'Centro', 'Belo Horizonte', 'MG', '30130000'),
+(4, 'Rua D', '400', 'Casa', 'Jardim D', 'Curitiba', 'PR', '80010000'),
+(5, 'Rua E', '500', NULL, 'Centro', 'Fortaleza', 'CE', '60010000'),
+(6, 'Rua F', '600', 'Sala 2', 'Jardim F', 'Salvador', 'BA', '40010000'),
+(7, 'Rua G', '700', NULL, 'Bairro G', 'Manaus', 'AM', '69010000'),
+(8, 'Rua H', '800', 'Loja', 'Centro', 'Porto Alegre', 'RS', '90010000'),
+(9, 'Rua I', '900', NULL, 'Bairro I', 'Recife', 'PE', '50010000'),
+(10, 'Rua J', '1000', 'Apto 10', 'Jardim J', 'Goiânia', 'GO', '74010000');
+
+-- Inserindo dados em pedidos_entregues
+INSERT INTO pedidos_entregues (id_pedido, data_entrega) VALUES
+(4, '2024-11-23'),
+(8, '2024-11-27'),
+(10, '2024-11-29');

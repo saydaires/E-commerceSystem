@@ -56,7 +56,6 @@ public class frmMenuComprar extends javax.swing.JFrame {
         tableProdutos = new javax.swing.JTable();
         txtNome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        btnBuscarNome = new javax.swing.JButton();
         btnComprar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -97,13 +96,6 @@ public class frmMenuComprar extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("INSIRA O NOME DO PRODUTO DESEJADO");
 
-        btnBuscarNome.setText("BUSCAR");
-        btnBuscarNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarNomeActionPerformed(evt);
-            }
-        });
-
         btnComprar.setText("COMPRAR");
         btnComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +108,6 @@ public class frmMenuComprar extends javax.swing.JFrame {
         jDesktopPane1.setLayer(jScrollPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(txtNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(btnBuscarNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(btnComprar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
@@ -130,13 +121,11 @@ public class frmMenuComprar extends javax.swing.JFrame {
                 .addGap(99, 99, 99)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                            .addComponent(btnBuscarNome)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnComprar))
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1))
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(btnComprar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
@@ -154,9 +143,7 @@ public class frmMenuComprar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscarNome)
-                    .addComponent(btnComprar))
+                .addComponent(btnComprar)
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -186,32 +173,12 @@ public class frmMenuComprar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
 
-    private void btnBuscarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNomeActionPerformed
-        String nomeProduto = txtNome.getText().toLowerCase();
-        ProdutoMODEL produtoBuscado = ProdutoSERVICE.buscarProdutoNome(nomeProduto);
-
-        if(produtoBuscado != null && !codigosProdutos.contains(produtoBuscado.getCod())) {
-            if(produtoBuscado.getQtdEstoque() <= 0) {
-                JOptionPane.showMessageDialog(null, "Produto buscado INDISPONIVEL!");
-                txtNome.setText("");
-                return;
-            }
-            DefaultTableModel tableModel = (DefaultTableModel) tableProdutos.getModel();
-            codigosProdutos.add(produtoBuscado.getCod());
-
-            String nomeCategoria = SERVICE.ADMIN.BuscarCategoria.buscarNomeCategoria(produtoBuscado.getIdCategoria());
-            Object[] registro = {produtoBuscado.getNome(), nomeCategoria, produtoBuscado.getPrecoUnitario()};
-            tableModel.addRow(registro);
-        }
-        txtNome.setText("");
-    }//GEN-LAST:event_btnBuscarNomeActionPerformed
-
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         String nomeProduto = txtNome.getText().toLowerCase();
         ProdutoMODEL produtoBuscado = ProdutoSERVICE.buscarProdutoNome(nomeProduto);
         if(produtoBuscado != null) {
             this.dispose();
-            frmComprarProduto telaComprar = new frmComprarProduto(produtoBuscado);
+            frmComprarProduto telaComprar = new frmComprarProduto(produtoBuscado, clienteLogado);
             telaComprar.setVisible(true);
         }
     }//GEN-LAST:event_btnComprarActionPerformed
@@ -252,7 +219,6 @@ public class frmMenuComprar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscarNome;
     private javax.swing.JButton btnComprar;
     private javax.swing.JButton btnRetorno;
     private javax.swing.JDesktopPane jDesktopPane1;

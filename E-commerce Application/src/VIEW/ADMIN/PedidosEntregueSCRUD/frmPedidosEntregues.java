@@ -186,11 +186,13 @@ public class frmPedidosEntregues extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRetorno2ActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+       idPedidosEntregues.clear();
+        DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
+        tableModel.setRowCount(0);
         int idPedidoEntregue = (Integer) spinnerId.getValue();
         PedidosEntreguesMODEL pedidoEntregue = PedidosEntreguesSERVICE.buscarPedidoEntregue(idPedidoEntregue);
 
         if(pedidoEntregue != null && !idPedidosEntregues.contains(idPedidoEntregue)) {
-            DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
             idPedidosEntregues.add(pedidoEntregue.getIdPedidoEntregue());
             
             java.util.Date dataEntrega = null;

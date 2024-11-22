@@ -237,11 +237,13 @@ public class frmMenuClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnListarClientesActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        cpfBuscados.clear();
+        DefaultTableModel tableModel = (DefaultTableModel) tableClientes.getModel();
+        tableModel.setRowCount(0);
         String cpfCliente = txtCpf.getText();
         ClienteMODEL cliente = ClienteSERVICE.buscarCliente(cpfCliente);
 
         if(cliente != null && !cpfBuscados.contains(cpfCliente)) {
-            DefaultTableModel tableModel = (DefaultTableModel) tableClientes.getModel();
             cpfBuscados.add(cpfCliente);
             java.util.Date dataNascimento = null;
             try {

@@ -41,6 +41,7 @@ public class frmStatusPedido extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Data mal formatada!");
             }
             Object[] registro = {pedido.getStatusPedido(), dataPedido, pedido.getCodigoPedido()};
+            tableModel.addRow(registro);
         }
     }
 

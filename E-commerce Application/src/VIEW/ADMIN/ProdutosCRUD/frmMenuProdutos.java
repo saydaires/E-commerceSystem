@@ -336,11 +336,13 @@ public class frmMenuProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void btnBuscarCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCodActionPerformed
+        codigosProdutos.clear();
+        DefaultTableModel tableModel = (DefaultTableModel) tableProdutos.getModel();
+        tableModel.setRowCount(0);
         String codigoProduto = txtCodigo.getText();
         ProdutoMODEL produtoBuscado = ProdutoSERVICE.buscarProdutoCodigo(codigoProduto);
         
         if(produtoBuscado != null && !codigosProdutos.contains(produtoBuscado.getCod())) {
-            DefaultTableModel tableModel = (DefaultTableModel) tableProdutos.getModel();
             codigosProdutos.add(produtoBuscado.getCod());
             
             String nomeCategoria = SERVICE.ADMIN.BuscarCategoria.buscarNomeCategoria(produtoBuscado.getIdCategoria());
@@ -353,11 +355,13 @@ public class frmMenuProdutos extends javax.swing.JFrame {
     List<String> codigosProdutos = new ArrayList<>(); // evitar que um produto ja buscado seja floodado na tabela
     
     private void btnBuscarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNomeActionPerformed
+        codigosProdutos.clear();
+        DefaultTableModel tableModel = (DefaultTableModel) tableProdutos.getModel();
+        tableModel.setRowCount(0);
         String nomeProduto = txtNome.getText().toLowerCase();
         ProdutoMODEL produtoBuscado = ProdutoSERVICE.buscarProdutoNome(nomeProduto);
         
         if(produtoBuscado != null && !codigosProdutos.contains(produtoBuscado.getCod())) {
-            DefaultTableModel tableModel = (DefaultTableModel) tableProdutos.getModel();
             codigosProdutos.add(produtoBuscado.getCod());
             
             String nomeCategoria = SERVICE.ADMIN.BuscarCategoria.buscarNomeCategoria(produtoBuscado.getIdCategoria());

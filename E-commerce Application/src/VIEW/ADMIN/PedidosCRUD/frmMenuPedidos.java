@@ -225,11 +225,13 @@ public class frmMenuPedidos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRetorno2ActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        idPedidosBuscados.clear();
+        DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
+        tableModel.setRowCount(0);
         int idPedido = (Integer) spinnerId.getValue();
         PedidosMODEL pedido = PedidosSERVICE.buscarPedido(idPedido);
 
         if(pedido != null && !idPedidosBuscados.contains(idPedido)) {
-            DefaultTableModel tableModel = (DefaultTableModel) tablePedidos.getModel();
             idPedidosBuscados.add(pedido.getIdPedido());
             java.util.Date dataPedido = null;
             try {

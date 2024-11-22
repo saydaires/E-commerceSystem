@@ -68,6 +68,9 @@ public class frmCadastro extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("CÓDIGO PRODUTO");
 
+        spinnerQtd.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+
+        spinnerPreco.setModel(new javax.swing.SpinnerNumberModel(1.0d, 1.0d, null, 1.0d));
         spinnerPreco.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spinnerPrecoStateChanged(evt);
@@ -210,7 +213,7 @@ public class frmCadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
         String nomeProduto = txtNome.getText().toLowerCase();
         int qtdEstoque = (Integer) spinnerQtd.getValue();
-        int precoUnitario = (Integer) spinnerPreco.getValue();
+        double precoUnitario = (Double) spinnerPreco.getValue();
         String codProduto = txtCod.getText();
         String categoria = txtCategoria.getText().toLowerCase();
         if(nomeProduto.equals("") || codProduto.equals("")|| categoria.equals("")) {
@@ -225,8 +228,8 @@ public class frmCadastro extends javax.swing.JFrame {
         txtCategoria.setText("");
         txtNome.setText("");
         txtCod.setText("");
-        spinnerQtd.setValue(0);
-        spinnerPreco.setValue(0);
+        spinnerQtd.setValue(1);
+        spinnerPreco.setValue(1);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void txtCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoriaActionPerformed

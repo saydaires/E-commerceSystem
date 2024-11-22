@@ -185,7 +185,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtData">
           <Properties>
-            <Property name="text" type="java.lang.String" value="aaaa - MM - dd"/>
+            <Property name="text" type="java.lang.String" value="aaa-MM-dd"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">

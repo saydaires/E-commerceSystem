@@ -5,8 +5,8 @@ import MODEL.ItensPedidosMODEL;
 import java.util.List;
 
 public class ItensPedidosSERVICE {
-    public static void cadastrarItemPedido(int id_pedido, int id_produto, Integer id_cupom, int quantidade, double precoUnitario, double valorTotal) {
-        ItensPedidosMODEL itemPedido = new ItensPedidosMODEL(id_pedido, id_produto, id_cupom, quantidade, precoUnitario, valorTotal);
+    public static void cadastrarItemPedido(int id_pedido, int codigoPedido, int id_produto, int quantidade, double precoUnitario, double valorTotal) {
+        ItensPedidosMODEL itemPedido = new ItensPedidosMODEL(id_pedido, codigoPedido, id_produto, quantidade, precoUnitario, valorTotal);
         ItensPedidosDAO.insertItemPedido(itemPedido);
     }
     
@@ -17,14 +17,4 @@ public class ItensPedidosSERVICE {
     public static List<ItensPedidosMODEL> listarItensPedidos() {
         return ItensPedidosDAO.listItensPedidos();
     }
-    
-    /*
-    public static double buscarPrecoUnitario(ItensPedidosMODEL itemPedido) {
-        return ItensPedidosDAO.getPrecoUnitario(itemPedido);
-    }
-    
-    public static double calcularValorTotal(ItensPedidosMODEL itemPedido) {
-        return ItensPedidosDAO.calcularValorTotal(itemPedido);
-    }
-    */
 }
