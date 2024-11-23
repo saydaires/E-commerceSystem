@@ -1,0 +1,2 @@
+DELETE FROM clientes
+WHERE cpf = '98765432100';

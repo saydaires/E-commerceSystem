@@ -1,0 +1,2 @@
+DELETE FROM pedidos_entregues
+WHERE data_entrega < DATE_SUB(CURDATE(), INTERVAL 1 YEAR);

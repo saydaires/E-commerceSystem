@@ -1,0 +1,4 @@
+UPDATE pedidos
+SET status_pedido = 'ENVIADO'
+WHERE status_pedido = 'EM PROCESSAMENTO'
+  AND DATEDIFF(CURDATE(), data_pedido) > 5;
