@@ -1,0 +1,11 @@
+DELIMITER $$
+CREATE TRIGGER LogAlterarPreco
+BEFORE UPDATE ON produtos
+FOR EACH ROW
+BEGIN
+    IF OLD.preco_unitario <> NEW.preco_unitario THEN
+        INSERT INTO log_precos (id_produto, preco_antigo, preco_novo, data_log)
+        VALUES (OLD.id_produto, OLD.preco_unitario, NEW.preco_unitario, NOW());
+    END IF;
+END $$
+DELIMITER ;

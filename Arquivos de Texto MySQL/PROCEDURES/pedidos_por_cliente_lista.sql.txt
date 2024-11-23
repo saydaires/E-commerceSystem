@@ -1,0 +1,11 @@
+DELIMITER $$
+CREATE PROCEDURE ListarPedidosCliente(
+    IN p_id_cliente INT,
+    IN p_status_pedido ENUM('PENDENTE', 'EM PROCESSAMENTO', 'ENVIADO', 'ENTREGUE')
+)
+BEGIN
+    SELECT * 
+    FROM pedidos
+    WHERE id_cliente = p_id_cliente AND status_pedido = p_status_pedido;
+END $$
+DELIMITER ;

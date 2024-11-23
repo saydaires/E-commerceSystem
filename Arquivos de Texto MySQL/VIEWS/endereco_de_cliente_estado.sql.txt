@@ -1,0 +1,4 @@
+CREATE VIEW EnderecosPorEstado AS
+SELECT estado, COUNT(id_endereco) AS total_enderecos
+FROM enderecos
+GROUP BY estado;

@@ -1,0 +1,11 @@
+DELIMITER $$
+CREATE PROCEDURE AtualizarEstoque(
+    IN p_id_produto INT,
+    IN p_qtd_estoque INT
+)
+BEGIN
+    UPDATE produtos
+    SET qtd_estoque = p_qtd_estoque
+    WHERE id_produto = p_id_produto;
+END $$
+DELIMITER ;

@@ -1,0 +1,4 @@
+CREATE VIEW ProdutosEstoqueBaixo AS
+SELECT id_produto, nome_produto, qtd_estoque
+FROM produtos
+WHERE qtd_estoque < 10;

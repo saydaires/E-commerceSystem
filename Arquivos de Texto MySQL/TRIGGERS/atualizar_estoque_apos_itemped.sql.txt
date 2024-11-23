@@ -1,0 +1,10 @@
+DELIMITER $$
+CREATE TRIGGER AtualizarEstoqueAoInserir
+AFTER INSERT ON itens_pedidos
+FOR EACH ROW
+BEGIN
+    UPDATE produtos
+    SET qtd_estoque = qtd_estoque - NEW.quantidade
+    WHERE id_produto = NEW.id_produto;
+END $$
+DELIMITER ;

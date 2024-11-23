@@ -1,0 +1,12 @@
+DELIMITER $$
+CREATE FUNCTION EstoqueDisponivel(p_id_produto INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE qtd_estoque INT;
+    SELECT qtd_estoque INTO qtd_estoque
+    FROM produtos
+    WHERE id_produto = p_id_produto;
+    RETURN qtd_estoque;
+END $$
+DELIMITER ;

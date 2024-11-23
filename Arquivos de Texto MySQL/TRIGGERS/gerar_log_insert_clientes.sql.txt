@@ -1,0 +1,9 @@
+DELIMITER $$
+CREATE TRIGGER LogInserirCliente
+AFTER INSERT ON clientes
+FOR EACH ROW
+BEGIN
+    INSERT INTO log_clientes (id_cliente, data_log)
+    VALUES (NEW.id_cliente, NOW());
+END $$
+DELIMITER ;

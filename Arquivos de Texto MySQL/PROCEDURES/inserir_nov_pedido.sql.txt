@@ -1,0 +1,12 @@
+DELIMITER $$
+CREATE PROCEDURE InserirPedido(
+    IN p_id_cliente INT,
+    IN p_codigo_pedido INT,
+    IN p_data_pedido DATE,
+    IN p_status_pedido ENUM('PENDENTE', 'EM PROCESSAMENTO', 'ENVIADO', 'ENTREGUE')
+)
+BEGIN
+    INSERT INTO pedidos (id_cliente, codigo_pedido, data_pedido, status_pedido)
+    VALUES (p_id_cliente, p_codigo_pedido, p_data_pedido, p_status_pedido);
+END $$
+DELIMITER ;

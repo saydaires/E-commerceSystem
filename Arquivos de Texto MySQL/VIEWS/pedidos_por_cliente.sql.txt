@@ -1,0 +1,4 @@
+CREATE VIEW PedidosPorCliente AS
+SELECT c.id_cliente, c.nome_cliente, p.id_pedido, p.data_pedido, p.status_pedido
+FROM clientes c
+JOIN pedidos p ON c.id_cliente = p.id_cliente;

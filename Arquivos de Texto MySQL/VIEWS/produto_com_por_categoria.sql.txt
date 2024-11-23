@@ -1,0 +1,5 @@
+CREATE VIEW ProdutosPorCategoria AS
+SELECT cat.nome_categoria, COUNT(prod.id_produto) AS total_produtos
+FROM categorias cat
+JOIN produtos prod ON cat.id_categoria = prod.id_categoria
+GROUP BY cat.id_categoria;

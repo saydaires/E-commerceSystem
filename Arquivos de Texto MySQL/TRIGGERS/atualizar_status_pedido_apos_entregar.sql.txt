@@ -1,0 +1,10 @@
+DELIMITER $$
+CREATE TRIGGER AtualizarStatusPedido
+AFTER INSERT ON pedidos_entregues
+FOR EACH ROW
+BEGIN
+    UPDATE pedidos
+    SET status_pedido = 'ENTREGUE'
+    WHERE id_pedido = NEW.id_pedido;
+END $$
+DELIMITER ;

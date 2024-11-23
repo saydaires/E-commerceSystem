@@ -1,0 +1,12 @@
+DELIMITER $$
+CREATE FUNCTION TotalProdutosVendidos(p_id_produto INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE total_vendido INT;
+    SELECT SUM(quantidade) INTO total_vendido
+    FROM itens_pedidos
+    WHERE id_produto = p_id_produto;
+    RETURN total_vendido;
+END $$
+DELIMITER ;

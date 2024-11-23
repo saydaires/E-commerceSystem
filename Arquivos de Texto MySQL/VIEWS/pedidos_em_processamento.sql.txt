@@ -1,0 +1,4 @@
+CREATE VIEW PedidosEmProcessamento AS
+SELECT id_pedido, data_pedido, codigo_pedido
+FROM pedidos
+WHERE status_pedido = 'EM PROCESSAMENTO';
