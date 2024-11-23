@@ -1,3 +1,8 @@
+⚠️⚠️ **IMPORTANTE**: O repositório remoto no GitHub não está configurado com o driver JDBC, sendo necessária a instalação manual
+de quem importar o programa para sua máquina local. Essa instalação consiste em, dentro do projeto na IDE utilizada, importar o
+Driver JDBC "mysql-connector-java-5.1.47.jar" para a 'Libraries' desse projeto. ⚠️⚠️
+
+
 Passos para executar a aplicação:
 
 PASSO I) **BANCO DE DADOS**
